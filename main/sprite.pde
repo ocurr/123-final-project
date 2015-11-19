@@ -60,36 +60,36 @@ public class Sprite extends GameObject {
         return posY;
     }
 
-    public boolean didCollide(int x, int y) {
-        return hb.detectCollision(posX, posY, x, y);
+    public HitBox getHitBox() {
+        return hb;
     }
 
-    public boolean didCollideLeft(int x, int y) {
-        return 
-            hb.detectCollisionLeft(posX, posY, x, y) &&
-            hb.detectCollisionTop(posX, posY, x, y) &&
-            hb.detectCollisionBottom(posX, posY, x, y);
+    public boolean didCollide(HitBox other) {
+        return hb.detectCollision(other);
     }
 
-    public boolean didCollideRight(int x, int y) {
-        return
-            hb.detectCollisionRight(posX, posY, x, y) &&
-            hb.detectCollisionTop(posX, posY, x, y) &&
-            hb.detectCollisionBottom(posX, posY, x, y);
+    public boolean didCollideLeft(HitBox other) {
+        hb.setPositionX(posX);
+        hb.setPositionY(posY);
+        return hb.detectCollisionLeft(other);
     }
 
-    public boolean didCollideTop(int x, int y) {
-        return
-            hb.detectCollisionTop(posX, posY, x, y);
-            //hb.detectCollisionLeft(posX, posY, x, y) &&
-            //hb.detectCollisionRight(posX, posY, x, y);
+    public boolean didCollideRight(HitBox other) {
+        hb.setPositionX(posX);
+        hb.setPositionY(posY);
+        return hb.detectCollisionRight(other);
     }
 
-    public boolean didCollideBottom(int x, int y) {
-        return
-            hb.detectCollision(posX, posY, x, y) &&
-            hb.detectCollisionLeft(posX, posY, x, y) &&
-            hb.detectCollisionRight(posX, posY, x, y);
+    public boolean didCollideTop(HitBox other) {
+        hb.setPositionX(posX);
+        hb.setPositionY(posY);
+        return hb.detectCollisionTop(other);
+    }
+
+    public boolean didCollideBottom(HitBox other) {
+        hb.setPositionX(posX);
+        hb.setPositionY(posY);
+        return hb.detectCollisionBottom(other);
     }
 
     public void drawHitRect() {
