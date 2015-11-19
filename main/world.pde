@@ -9,15 +9,21 @@ public class World extends GameObject {
 
     private Sprite character;
 
-    char currentKey;
+    private HashMap<Character,Boolean> keys;
 
     public World() {
         levels = new ArrayList<Level>();
         currentLevel = 0;
 
-        currentKey = 'Z';
-
         camera = new Camera();
+
+        keys = new HashMap<Character,Boolean>();
+        keys.put('d',false);
+        keys.put('D',false);
+        keys.put('a',false);
+        keys.put('A',false);
+        keys.put('w',false);
+        keys.put('W',false);
 
         character = new Sprite(spritePath + "character.png");
     }
@@ -47,7 +53,11 @@ public class World extends GameObject {
     }
 
     public void updateKeyPress(char key) {
-        currentKey = key;
+        keys.put(key,true);
+    }
+
+    public void updateKeyRelease(char key) {
+        keys.put(key,false);
     }
 
     @Override
@@ -62,13 +72,14 @@ public class World extends GameObject {
         int dx, dy;
         dx = dy = 0;
 
-        if (keyPressed) {
-            if (key == 'd' || key == 'D') {
-                dx = 5;
-            }
-            if (key == 'a' || key == 'A') {
-                dx = -5;
-            }
+        if (keys.get('d') || keys.get('D')) {
+            dx = 5;
+        }
+        if (keys.get('a') || keys.get('A')) {
+            dx = -5;
+        }
+        if (keys.get('w') || keys.get('W')) {
+            dy = -10;
         }
 
         character.move(dx,dy);

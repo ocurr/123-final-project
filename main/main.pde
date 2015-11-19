@@ -23,6 +23,10 @@ void keyPressed() {
     world.updateKeyPress(key);
 }
 
+void keyReleased() {
+    world.updateKeyRelease(key);
+}
+
 void draw() {
     background(255);
     world.update();
