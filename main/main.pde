@@ -1,6 +1,5 @@
 
 World world;
-Sprite sprite;
 
 String resourcePath = "resources/";
 String levelPath = resourcePath + "levels/";
