@@ -12,8 +12,8 @@ public class Sprite extends GameObject {
         img = loadImage(name);
         img.loadPixels();
 
-        posX = width/2;
-        posY = height/2;
+        posX = 0;
+        posY = 0;
 
         hb = new HitBox(img);
     }
@@ -26,11 +26,11 @@ public class Sprite extends GameObject {
         return hb.getY();
     }
 
-    public float getWidth() {
+    public int getWidth() {
         return hb.getWidth();
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return hb.getHeight();
     }
 
@@ -47,8 +47,53 @@ public class Sprite extends GameObject {
         posY = y;
     }
 
+    public void move(int dx, int dy) {
+        posX += dx;
+        posY += dy;
+    }
+
+    public int getX() {
+        return posX;
+    }
+
+    public int getY() {
+        return posY;
+    }
+
     public boolean didCollide(int x, int y) {
         return hb.detectCollision(posX, posY, x, y);
+    }
+
+    public boolean didCollideLeft(int x, int y) {
+        return 
+            hb.detectCollisionLeft(posX, posY, x, y) &&
+            hb.detectCollisionTop(posX, posY, x, y) &&
+            hb.detectCollisionBottom(posX, posY, x, y);
+    }
+
+    public boolean didCollideRight(int x, int y) {
+        return
+            hb.detectCollisionRight(posX, posY, x, y) &&
+            hb.detectCollisionTop(posX, posY, x, y) &&
+            hb.detectCollisionBottom(posX, posY, x, y);
+    }
+
+    public boolean didCollideTop(int x, int y) {
+        return
+            hb.detectCollisionTop(posX, posY, x, y) &&
+            hb.detectCollisionLeft(posX, posY, x, y) &&
+            hb.detectCollisionRight(posX, posY, x, y);
+    }
+
+    public boolean didCollideBottom(int x, int y) {
+        return
+            hb.detectCollision(posX, posY, x, y) &&
+            hb.detectCollisionLeft(posX, posY, x, y) &&
+            hb.detectCollisionRight(posX, posY, x, y);
+    }
+
+    public void drawHitRect() {
+        rect(getX(),getY(),hb.getWidth(),hb.getHeight());
     }
 
     @Override
@@ -57,6 +102,8 @@ public class Sprite extends GameObject {
 
     @Override
     public void update() {
+        pushMatrix();
         image(img, posX-getImageOffsetX(), posY-getImageOffsetY());
+        popMatrix();
     }
 }
