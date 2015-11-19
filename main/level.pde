@@ -16,13 +16,15 @@ public class Level extends GameObject {
 
         platforms = new ArrayList<Sprite>();
 
-        gravity = 1;
+        gravity = 5;
 
-        for (int i=0; i<1; i++) {
+        for (int i=0; i<3; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
         }
 
         platforms.get(0).setPosition(0,height-(height/6)-10);
+        platforms.get(1).setPosition(width-250,height-(height/5)-10);
+        platforms.get(2).setPosition(width/3+22,height-(height/3)+18);
     }
 
     public int getWidth() {
@@ -35,7 +37,7 @@ public class Level extends GameObject {
 
     public void grabCharacter(Sprite c) {
         character = c;
-        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight()-20);
+        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight()-50);
     }
 
     public void init(Camera cam) {
@@ -50,26 +52,25 @@ public class Level extends GameObject {
         if (!background.didCollideLeft(character.getX(), character.getY())) {
             character.setPositionX(background.getX());
         } else if (!background.didCollideRight(
-                            character.getX()+character.getWidth(),
-                            character.getY())) {
+                    character.getX()+character.getWidth(),
+                    character.getY())) {
             character.setPositionX(
-                (background.getX()+background.getWidth())-character.getWidth());
+                    (background.getX()+background.getWidth())-character.getWidth());
         }
 
-        for (int p=0; p<1; p++) {
+        for (int p=0; p<3; p++) {
             Sprite pl = platforms.get(p);
-            if (
-                pl.didCollideTop(
-                    character.getX(),
-                    character.getY()+character.getHeight()) &&
-                pl.didCollideTop(
-                    character.getX()+character.getWidth(),
-                    character.getY()+character.getHeight())) {
+            if (pl.didCollide(
+                        character.getX(),
+                        character.getY()+character.getHeight()) ||
+                    pl.didCollide(
+                        character.getX()+character.getWidth(),
+                        character.getY()+character.getHeight())) {
                 character.setPositionY(pl.getY()-character.getHeight());
             }
 
             pl.update();
-            pl.drawHitRect();
+            //pl.drawHitRect();
         }
 
         character.move(0,gravity);
