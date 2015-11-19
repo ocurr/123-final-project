@@ -5,9 +5,21 @@ public class World extends GameObject {
 
     private int currentLevel;
 
+    private Camera camera;
+
+    private Sprite character;
+
+    char currentKey;
+
     public World() {
         levels = new ArrayList<Level>();
         currentLevel = 0;
+
+        currentKey = 'Z';
+
+        camera = new Camera();
+
+        character = new Sprite(spritePath + "character.png");
     }
 
     public void addLevel(String levelPath) {
@@ -35,21 +47,42 @@ public class World extends GameObject {
     }
 
     public void updateKeyPress(char key) {
-        if (key == 'd' || key == 'D') {
-        }
+        currentKey = key;
     }
 
     @Override
     public void init() {
-        levels.get(0).init();
+        levels.get(0).init(camera);
+        levels.get(0).grabCharacter(character);
     }
 
     @Override
     public void update() {
+
+        int dx, dy;
+        dx = dy = 0;
+
+        if (keyPressed) {
+            if (key == 'd' || key == 'D') {
+                dx = 5;
+            }
+            if (key == 'a' || key == 'A') {
+                dx = -5;
+            }
+        }
+
+        character.move(dx,dy);
+        if (character.getX() > width/2) {
+            camera.setPosition(-(character.getX()-width/2), 0);
+        }
+
+        camera.set();
         pushMatrix();
 
         levels.get(currentLevel).update();
+        character.update();
 
         popMatrix();
+        camera.unset();
     }
 }
