@@ -33,7 +33,7 @@ public class Level extends GameObject {
 
     public void grabCharacter(Sprite c) {
         character = c;
-        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight()-50);
+        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
     }
 
     public void init(Camera cam) {
