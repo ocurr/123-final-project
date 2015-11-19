@@ -80,9 +80,9 @@ public class Sprite extends GameObject {
 
     public boolean didCollideTop(int x, int y) {
         return
-            hb.detectCollisionTop(posX, posY, x, y) &&
-            hb.detectCollisionLeft(posX, posY, x, y) &&
-            hb.detectCollisionRight(posX, posY, x, y);
+            hb.detectCollisionTop(posX, posY, x, y);
+            //hb.detectCollisionLeft(posX, posY, x, y) &&
+            //hb.detectCollisionRight(posX, posY, x, y);
     }
 
     public boolean didCollideBottom(int x, int y) {
