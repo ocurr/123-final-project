@@ -10,9 +10,6 @@ public class HitBox extends GameObject {
 
     private box b;
 
-    int posX;
-    int posY;
-
     HitBox() {
         b = new box();
     }
@@ -79,22 +76,6 @@ public class HitBox extends GameObject {
         b.height = height;
     }
 
-    public void setPositionX(int x) {
-        posX = x;
-    }
-
-    public void setPositionY(int y) {
-        posY = y;
-    }
-
-    public int getPositionX() {
-        return posX;
-    }
-
-    public int getPositionY() {
-        return posY;
-    }
-
     public int getX() {
         return b.x;
     }
@@ -109,5 +90,45 @@ public class HitBox extends GameObject {
 
     public int getHeight() {
         return b.height+1;
+    }
+
+    private float impLine(float x1, float y1, float x2, float y2, float x, float y) {
+        return (y1 - y2)*x + (x2-x1)*y + x1*y2 - x2*y1;
+    }
+
+    public boolean detectCollision(int posX, int posY, int x, int y) {
+        return
+            detectCollisionTop(posX,posY,x,y) &&
+            detectCollisionBottom(posX,posY,x,y) &&
+            detectCollisionLeft(posX,posY,x,y) &&
+            detectCollisionRight(posX,posY,x,y);
+    }
+
+    public boolean detectCollisionTop(int posX, int posY, int x, int y) {
+        if (x < posX || x > posX+b.width) {
+            return false;
+        }
+        return impLine(posX,posY,posX+b.width,posY,x,y) > 0;
+    }
+
+    public boolean detectCollisionBottom(int posX, int posY, int x, int y) {
+        if (x > posX+b.width || x < posX) {
+            return false;
+        }
+        return impLine(posX+b.width,posY+b.height,posX,posY+b.height,x,y) > 0;
+    }
+
+    public boolean detectCollisionLeft(int posX, int posY, int x, int y) {
+        if (y < posY || y > posY+b.height) {
+            return false;
+        }
+        return impLine(posX,posY,posX,posY+b.height,x,y) < 0;
+    }
+
+    public boolean detectCollisionRight(int posX, int posY, int x, int y) {
+        if (y < posY || y > posY+b.height) {
+            return false;
+        }
+        return impLine(posX+b.width,posY,posX+b.width,posY+b.height,x,y) > 0;
     }
 }

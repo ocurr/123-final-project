@@ -45,9 +45,11 @@ public class Level extends GameObject {
         pushMatrix();
         background.update();
 
-        if (!background.didCollideLeft(character.getHitBox())) {
+        if (!background.didCollideLeft(character.getX(), character.getY())) {
             character.setPositionX(background.getX());
-        } else if (!background.didCollideRight(character.getHitBox())) {
+        } else if (!background.didCollideRight(
+                    character.getX()+character.getWidth(),
+                    character.getY())) {
             character.setPositionX(
                     (background.getX()+background.getWidth())-character.getWidth());
         }
