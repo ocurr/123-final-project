@@ -85,11 +85,11 @@ public class HitBox extends GameObject {
     }
 
     public int getWidth() {
-        return b.width;
+        return b.width+1;
     }
 
     public int getHeight() {
-        return b.height;
+        return b.height+1;
     }
 
     private float impLine(float x1, float y1, float x2, float y2, float x, float y) {
@@ -98,9 +98,25 @@ public class HitBox extends GameObject {
 
     public boolean detectCollision(int posX, int posY, int x, int y) {
         return
-            impLine(posX,posY,posX+b.width,posY,x,y) > 0 &&
-            impLine(posX+b.width,posY,posX+b.width,posY+b.height,x,y) > 0 &&
-            impLine(posX+b.width,posY+b.height,posX,posY+b.height,x,y) > 0 &&
-            impLine(posX,posY,posX,posY+b.height,x,y) < 0;
+            detectCollisionTop(posX,posY,x,y) &&
+            detectCollisionBottom(posX,posY,x,y) &&
+            detectCollisionLeft(posX,posY,x,y) &&
+            detectCollisionRight(posX,posY,x,y);
+    }
+
+    public boolean detectCollisionTop(int posX, int posY, int x, int y) {
+        return impLine(posX,posY,posX+b.width,posY,x,y) > 0;
+    }
+
+    public boolean detectCollisionBottom(int posX, int posY, int x, int y) {
+        return impLine(posX+b.width,posY+b.height,posX,posY+b.height,x,y) > 0;
+    }
+
+    public boolean detectCollisionLeft(int posX, int posY, int x, int y) {
+        return impLine(posX,posY,posX,posY+b.height,x,y) < 0;
+    }
+
+    public boolean detectCollisionRight(int posX, int posY, int x, int y) {
+        return impLine(posX+b.width,posY,posX+b.width,posY+b.height,x,y) > 0;
     }
 }
