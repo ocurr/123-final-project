@@ -60,9 +60,9 @@ public class Level extends GameObject {
 
         for (int p=0; p<3; p++) {
             Sprite pl = platforms.get(p);
-            if (pl.didCollide(
-                        character.getX(),
-                        character.getY()+character.getHeight()) ||
+            if (
+                    pl.didCollide(
+                        character.getX(),character.getY()+character.getHeight()) ||
                     pl.didCollide(
                         character.getX()+character.getWidth(),
                         character.getY()+character.getHeight())) {
