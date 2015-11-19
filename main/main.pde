@@ -9,7 +9,6 @@ String spritePath = resourcePath + "sprites/";
 void setup() {
     size(800, 600);
 
-    sprite = new Sprite(spritePath + "character.png");
     world = new World();
 
     world.addLevel(levelPath + "level1.png");
@@ -18,11 +17,6 @@ void setup() {
 }
 
 void mousePressed() {
-    if (sprite.didCollide(mouseX,mouseY)) {
-        println("collidededed");
-    } else {
-        println("not collidededed");
-    }
 }
 
 void keyPressed() {
@@ -30,6 +24,6 @@ void keyPressed() {
 }
 
 void draw() {
+    background(255);
     world.update();
-    sprite.update();
 }
