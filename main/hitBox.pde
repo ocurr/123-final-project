@@ -105,18 +105,30 @@ public class HitBox extends GameObject {
     }
 
     public boolean detectCollisionTop(int posX, int posY, int x, int y) {
+        if (x < posX || x > posX+b.width) {
+            return false;
+        }
         return impLine(posX,posY,posX+b.width,posY,x,y) > 0;
     }
 
     public boolean detectCollisionBottom(int posX, int posY, int x, int y) {
+        if (x > posX+b.width || x < posX) {
+            return false;
+        }
         return impLine(posX+b.width,posY+b.height,posX,posY+b.height,x,y) > 0;
     }
 
     public boolean detectCollisionLeft(int posX, int posY, int x, int y) {
+        if (y < posY || y > posY+b.height) {
+            return false;
+        }
         return impLine(posX,posY,posX,posY+b.height,x,y) < 0;
     }
 
     public boolean detectCollisionRight(int posX, int posY, int x, int y) {
+        if (y < posY || y > posY+b.height) {
+            return false;
+        }
         return impLine(posX+b.width,posY,posX+b.width,posY+b.height,x,y) > 0;
     }
 }
