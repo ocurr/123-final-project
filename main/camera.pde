@@ -27,10 +27,42 @@ class Camera extends GameObject {
     }
 
     public void move(int dx, int dy) {
-        int newX = posX + dx;
-        int newY = posY + dy;
-        posX += dx;
-        posY += dy;
+        setX(posX + dx);
+        setY(posY + dy);
+    }
+
+    public void setX(int x) {
+        if (abs(x) <= bounds.x) {
+            posX = bounds.x;
+            return;
+        }
+        if (abs(x-width) >= (bounds.x+bounds.width)) {
+            posX = -((bounds.x+bounds.width)-width);
+            return;
+        }
+
+        posX = x;
+
+    }
+
+    public void setY(int y) {
+        if (abs(y) > bounds.y && abs(y-height) < (bounds.y+bounds.height)) {
+            posY = y;
+        }
+    }
+
+    public void setPosition(int x, int y) {
+        setX(x);
+        setY(y);
+    }
+
+    public void set() {
+        pushMatrix();
+        translate(posX, posY);
+    }
+
+    public void unset() {
+        popMatrix();
     }
 
     @Override
