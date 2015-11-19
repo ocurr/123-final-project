@@ -1,0 +1,123 @@
+PVector Sloc;
+PVector dir;
+float armR1, armR, time;
+boolean animate = false;
+boolean arm1 = false;
+boolean arm2 = false;
+
+void setup(){
+  size(400, 400);
+  background(118, 115, 115);
+  armR = -.2;
+  dir = new PVector(-1, 0);
+  Sloc = new PVector(width*.9, height/2);
+  time = 0.5; 
+  armR1 = 0;
+  armR = -.2;
+}
+
+void draw(){
+  drawSnowman();
+  if (animate){
+    animate();
+  }
+  drawArm1();
+  drawArm2();
+}
+
+
+void drawSnowman(){
+  noStroke();
+  smooth();
+  fill(255); 
+  //body starts here
+  ellipse(200, 300, 100, 85);
+  ellipse(200, 240, 80, 70);
+  ellipse(200, 190, 55, 55);
+  //buttons
+  fill(0);
+  ellipse(200, 290, 8, 8);
+  ellipse(200, 305, 8, 8);
+  ellipse(200, 320, 8, 8);
+  ellipse(200, 250, 8, 8);
+  ellipse(200, 235, 8, 8);
+  ellipse(200, 220, 8, 8);
+  //eyebrows on fleek
+  stroke(0);
+  strokeWeight(2);
+  line(190, 178, 180, 173);
+  line(210, 173, 200, 178);
+  //demon eyes
+  fill(255, 0, 0);
+  noStroke();
+  ellipse(185, 183, 8, 8);
+  ellipse(207, 183, 8, 8);
+  //nose
+  fill(247, 126, 12);
+  translate(0, -7);
+  triangle(200, 195, 160, 198, 200, 203);
+  //popMatrix();
+}
+
+void drawArm1(){
+  pushMatrix();
+  translate(-10, 5);
+  rotate(armR1);
+  translate(0, 0);
+  stroke(160, 86, 16);
+  line(175, 230, 120, 210);
+  line(120, 210, 105, 220);
+  line(120, 210, 103, 200);
+  popMatrix();
+}
+
+void drawArm2(){
+  pushMatrix();
+  translate(-34, 45);
+  rotate(armR);
+  translate(0, 0);
+  stroke(160, 86, 16);
+  line(225, 235, 275, 210);
+  line(275, 210, 295, 220);
+  line(275, 210, 270, 200);
+  popMatrix();
+}
+
+void animate(){
+  Sloc.x = Sloc.x + dir.x*time;
+  Sloc.y = Sloc.y +dir.y*time;
+  //contrain arm movement
+  if (armR1 < -1){
+    arm1 = false;
+  }
+  
+  if (armR1 > 0.3) {
+    arm1 = true;
+  }
+  
+  if (arm1 == true){
+    armR1 -= 0.3;
+  } else { 
+    armR1 += .03;
+  }
+  
+  //time for the second arm
+  if (armR < -1) {
+    arm2 = true;
+  }
+  
+  if (armR  > 0.3){
+    arm2 = false; 
+  }
+  
+  if (arm2 = false){
+    armR -= .03; 
+  } else { 
+    armR += .03;
+  }
+}
+
+void mousePress(){
+  Sloc.x = width*.9;
+  animate =! animate;
+}
