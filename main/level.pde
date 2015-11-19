@@ -5,8 +5,6 @@ public class Level extends GameObject {
 
     private Sprite character;
 
-    private int gravity;
-
     ArrayList<Sprite> platforms;
 
     public Level(String levelPath) {
@@ -15,8 +13,6 @@ public class Level extends GameObject {
         character = null;
 
         platforms = new ArrayList<Sprite>();
-
-        gravity = 5;
 
         for (int i=0; i<3; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
@@ -72,8 +68,6 @@ public class Level extends GameObject {
             pl.update();
             //pl.drawHitRect();
         }
-
-        character.move(0,gravity);
 
         popMatrix();
     }

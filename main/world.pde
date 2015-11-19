@@ -11,11 +11,15 @@ public class World extends GameObject {
 
     private HashMap<Character,Boolean> keys;
 
+    private int gravity;
+
     public World() {
         levels = new ArrayList<Level>();
         currentLevel = 0;
 
         camera = new Camera();
+
+        gravity = 5;
 
         keys = new HashMap<Character,Boolean>();
         keys.put('d',false);
@@ -82,7 +86,7 @@ public class World extends GameObject {
             dy = -10;
         }
 
-        character.move(dx,dy);
+        character.move(dx,dy+gravity);
         if (character.getX() > width/2) {
             camera.setPosition(-(character.getX()-width/2), 0);
         }
