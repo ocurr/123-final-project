@@ -5,6 +5,8 @@ public class Sprite extends GameObject {
 
     private HitBox hb;
 
+    private Collider collider;
+
     int posX;
     int posY;
 
@@ -16,6 +18,8 @@ public class Sprite extends GameObject {
         posY = 0;
 
         hb = new HitBox(img);
+
+        collider = new Collider();
     }
 
     public float getImageOffsetX() {
@@ -60,36 +64,32 @@ public class Sprite extends GameObject {
         return posY;
     }
 
-    public boolean didCollide(int x, int y) {
-        return hb.detectCollision(posX, posY, x, y);
+    public HitBox getHitBox() {
+        return hb;
     }
 
-    public boolean didCollideLeft(int x, int y) {
-        return 
-            hb.detectCollisionLeft(posX, posY, x, y) &&
-            hb.detectCollisionTop(posX, posY, x, y) &&
-            hb.detectCollisionBottom(posX, posY, x, y);
+    public boolean didCollide(HitBox other) {
+        return collider.detectCollision(hb, other);
     }
 
-    public boolean didCollideRight(int x, int y) {
-        return
-            hb.detectCollisionRight(posX, posY, x, y) &&
-            hb.detectCollisionTop(posX, posY, x, y) &&
-            hb.detectCollisionBottom(posX, posY, x, y);
+    public boolean didCollideLeft(HitBox other) {
+        return didCollide(other) && collider.detectCollisionLeft(hb, other);
     }
 
-    public boolean didCollideTop(int x, int y) {
-        return
-            hb.detectCollisionTop(posX, posY, x, y);
-            //hb.detectCollisionLeft(posX, posY, x, y) &&
-            //hb.detectCollisionRight(posX, posY, x, y);
+    public boolean didCollideRight(HitBox other) {
+        return didCollide(other) && collider.detectCollisionRight(hb, other);
     }
 
-    public boolean didCollideBottom(int x, int y) {
-        return
-            hb.detectCollision(posX, posY, x, y) &&
-            hb.detectCollisionLeft(posX, posY, x, y) &&
-            hb.detectCollisionRight(posX, posY, x, y);
+    public boolean didCollideTop(HitBox other) {
+        return didCollide(other) && collider.detectCollisionTop(hb, other);
+    }
+
+    public boolean didCollideBottom(HitBox other) {
+        return didCollide(other) && collider.detectCollisionBottom(hb, other);
+    }
+
+    public boolean didCollideVertLine(int x, int y, int height) {
+        return collider.detectVerticalLine(hb, x, y, height);
     }
 
     public void drawHitRect() {
@@ -104,6 +104,7 @@ public class Sprite extends GameObject {
     public void update() {
         pushMatrix();
         image(img, posX-getImageOffsetX(), posY-getImageOffsetY());
+        hb.setPosition(posX,posY);
         popMatrix();
     }
 }

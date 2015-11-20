@@ -33,7 +33,7 @@ public class Level extends GameObject {
 
     public void grabCharacter(Sprite c) {
         character = c;
-        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
+        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight()-50);
     }
 
     public void init(Camera cam) {
@@ -45,23 +45,16 @@ public class Level extends GameObject {
         pushMatrix();
         background.update();
 
-        if (!background.didCollideLeft(character.getX(), character.getY())) {
+        if (background.didCollideVertLine(character.getX(), character.getY(), character.getHeight())) {
             character.setPositionX(background.getX());
-        } else if (!background.didCollideRight(
-                    character.getX()+character.getWidth(),
-                    character.getY())) {
+        } else if (background.didCollideVertLine(character.getX(), character.getY(), character.getHeight())) {
             character.setPositionX(
                     (background.getX()+background.getWidth())-character.getWidth());
         }
 
         for (int p=0; p<3; p++) {
             Sprite pl = platforms.get(p);
-            if (
-                    pl.didCollide(
-                        character.getX(),character.getY()+character.getHeight()) ||
-                    pl.didCollide(
-                        character.getX()+character.getWidth(),
-                        character.getY()+character.getHeight())) {
+            if (pl.didCollideTop(character.getHitBox())) {
                 character.setPositionY(pl.getY()-character.getHeight());
             }
 

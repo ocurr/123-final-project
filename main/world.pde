@@ -83,7 +83,7 @@ public class World extends GameObject {
             dx = -5;
         }
         if (keys.get('w') || keys.get('W')) {
-            dy = -10;
+            dy = -15;
         }
 
         character.move(dx,dy+gravity);
