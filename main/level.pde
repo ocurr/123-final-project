@@ -45,13 +45,20 @@ public class Level extends GameObject {
         pushMatrix();
         background.update();
 
+        /*
         if (background.didCollideVertLine(character.getX(), character.getY(), character.getHeight())) {
             character.setPositionX(background.getX());
-        } else if (background.didCollideVertLine(character.getX(), character.getY(), character.getHeight())) {
+        } else if (background.didCollideVertLine(character.getX()+character.getWidth(), character.getY(), character.getHeight())) {
             character.setPositionX(
                     (background.getX()+background.getWidth())-character.getWidth());
         }
+        */
 
+        if (!background.didCollide(character.getHitBox())) {
+            println("COLLIDEDEDED");
+        }
+
+        /*
         for (int p=0; p<3; p++) {
             Sprite pl = platforms.get(p);
             if (pl.didCollideTop(character.getHitBox())) {
@@ -61,6 +68,7 @@ public class Level extends GameObject {
             pl.update();
             //pl.drawHitRect();
         }
+        */
 
         popMatrix();
     }

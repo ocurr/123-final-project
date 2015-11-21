@@ -28,6 +28,8 @@ public class World extends GameObject {
         keys.put('A',false);
         keys.put('w',false);
         keys.put('W',false);
+        keys.put('s',false);
+        keys.put('S',false);
 
         character = new Sprite(spritePath + "character.png");
     }
@@ -83,13 +85,19 @@ public class World extends GameObject {
             dx = -5;
         }
         if (keys.get('w') || keys.get('W')) {
-            dy = -15;
+            dy = -5;
+        }
+        if (keys.get('s') || keys.get('S')) {
+            dy = 5;
         }
 
-        character.move(dx,dy+gravity);
+        //XXX add gravity back when done testing collisions
+        character.move(dx,dy);
         if (character.getX() > width/2) {
             camera.setPosition(-(character.getX()-width/2), 0);
         }
+
+        println(character.getX());
 
         camera.set();
         pushMatrix();
