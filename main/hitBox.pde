@@ -10,13 +10,11 @@ public class HitBox extends GameObject {
 
     private box b;
 
-    private int posX;
-    private int posY;
+    private PVector position;
 
     HitBox() {
         b = new box();
-        posX = 0;
-        posY = 0;
+        position = new PVector(0,0);
     }
 
     HitBox(int x, int y, int endX, int endY) {
@@ -25,9 +23,8 @@ public class HitBox extends GameObject {
         b.y = y;
         b.width = endX - b.x;
         b.height = endY - b.y;
+        position = new PVector(0,0);
 
-        posX = 0;
-        posY = 0;
     }
 
     HitBox(PImage img) {
@@ -54,19 +51,18 @@ public class HitBox extends GameObject {
         }
         b.height = b.height-b.y;
         b.width = b.width-b.x;
-        posX = 0;
-        posY = 0;
+        position = new PVector(0,0);
     }
 
-    public void setX(int x) {
+    public void setOffsetX(int x) {
         b.x = x;
     }
 
-    public void setY(int y) {
+    public void setOffsetY(int y) {
         b.y = y;
     }
 
-    public void setXY(int x, int y) {
+    public void setOffsetXY(int x, int y) {
         b.x = x;
         b.y = y;
     }
@@ -86,12 +82,21 @@ public class HitBox extends GameObject {
         b.height = height;
     }
 
-    public int getX() {
+    public int getOffsetX() {
         return b.x;
     }
 
-    public int getY() {
+    public int getOffsetY() {
         return b.y;
+    }
+
+
+    public void setPositionX(int x) {
+        position.set(x, position.y);
+    }
+
+    public void setPositionY(int y) {
+        position.set(position.x, y);
     }
 
     public int getWidth() {
@@ -102,16 +107,31 @@ public class HitBox extends GameObject {
         return b.height+1;
     }
 
-    public int getPositionX() {
-        return posX;
+    public int getX() {
+        return (int)position.x;
     }
 
-    public int getPositionY() {
-        return posY;
+    public int getY() {
+        return (int)position.y;
+    }
+
+    public PVector getPosition() {
+        return position;
+    }
+
+    public float getDirection() {
+        return position.heading();
+    }
+
+    public int getRightX() {
+        return getX() + getWidth();
+    }
+
+    public int getBottomY() {
+        return getY() + getHeight();
     }
 
     public void setPosition(int x, int y) {
-        posX = x;
-        posY = y;
+        position.set(x,y);
     }
 }

@@ -5,6 +5,8 @@ public class Level extends GameObject {
 
     private Sprite character;
 
+    private HitBox mouse;
+
     ArrayList<Sprite> platforms;
 
     public Level(String levelPath) {
@@ -13,6 +15,8 @@ public class Level extends GameObject {
         character = null;
 
         platforms = new ArrayList<Sprite>();
+
+        mouse = new HitBox(0,0,1,1);
 
         for (int i=0; i<3; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
@@ -42,20 +46,25 @@ public class Level extends GameObject {
 
     @Override
     public void update() {
+        mouse.setPosition(mouseX,mouseY);
         pushMatrix();
         background.update();
 
         /*
-        if (background.didCollideVertLine(character.getX(), character.getY(), character.getHeight())) {
+        if (!background.didCollideLeft(character.getHitBox())) {
             character.setPositionX(background.getX());
-        } else if (background.didCollideVertLine(character.getX()+character.getWidth(), character.getY(), character.getHeight())) {
+        } else if (background.didCollideRight(character.getHitBox())) {
             character.setPositionX(
                     (background.getX()+background.getWidth())-character.getWidth());
         }
         */
 
-        if (!background.didCollide(character.getHitBox())) {
-            println("COLLIDEDEDED");
+        if (mousePressed) {
+            if (character.didCollideLeft(mouse)) {
+                println("COLLIDEDEDED");
+            } else {
+                println("NOT COLLIDEDEDED");
+            }
         }
 
         /*

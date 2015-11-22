@@ -92,12 +92,14 @@ public class World extends GameObject {
         }
 
         //XXX add gravity back when done testing collisions
-        character.move(dx,dy);
-        if (character.getX() > width/2) {
-            camera.setPosition(-(character.getX()-width/2), 0);
-        }
+        character.move(new PVector(dx,dy));
+        println(character.getDirection());
+        //if (character.getX() > width/2) {
+          //  camera.setPosition(-(character.getX()-width/2), 0);
+        //}
+        camera.setPosition(-character.getX(),-character.getY());
 
-        println(character.getX());
+        //println(character.getX());
 
         camera.set();
         pushMatrix();

@@ -1,11 +1,6 @@
 
 class Collider {
 
-    int twoBottom;
-    int oneBottom;
-    int twoRight;
-    int oneRight;
-
     public Collider() {
     }
 
@@ -13,68 +8,80 @@ class Collider {
         return (y1 - y2)*x + (x2-x1)*y + x1*y2 - x2*y1;
     }
 
-    private void calculatePositions(HitBox one, HitBox two) {
-        twoBottom = two.getPositionY() + two.getHeight();
-        oneBottom = one.getPositionY() + one.getHeight();
-        twoRight = two.getPositionX() + two.getWidth();
-        oneRight = one.getPositionX() + one.getWidth();
+    public boolean detectCollision(HitBox one, HitBox two) {
+        return leftHandCollision(one,two) || rightHandCollision(one,two);
     }
 
-    public boolean detectTotalCollision(HitBox one, HitBox two) {
-        calculatePositions(one, two);
-        int posX = one.getPositionX();
-        int posY = one.getPositionY();
-        int xL = two.getPositionX();
-        int xR = two.getPositionX()+two.getWidth();
-        int y = two.getPositionY();
+
+    private boolean leftHandCollision(HitBox one, HitBox two) {
         return
-            impLine(posX,posY,posX+one.getWidth(),posY,x,y) > 0 &&
-            impLine(posX+one.getWidth(),posY+one.getHeight(),posX,posY+one.getHeight(),x,y) > 0 &&
-            impLine(posX,posY,posX,posY+one.getHeight(),x,y) < 0 &&
-            impLine(posX+one.getWidth(),posY,posX+one.getWidth(),posY+one.getHeight(),x,y) > 0;
+            impLine(
+                    one.getX(),
+                    one.getY(),
+                    one.getRightX(),
+                    one.getY(),
+                    two.getX(),
+                    two.getY()) > 0 &&
+            impLine(
+                    one.getRightX(),
+                    one.getY(),
+                    one.getRightX(),
+                    one.getBottomY(),
+                    two.getX(),
+                    two.getY()) > 0 &&
+            impLine(
+                    one.getX(),
+                    one.getBottomY(),
+                    one.getRightX(),
+                    one.getBottomY(),
+                    two.getX(),
+                    two.getY()) < 0 &&
+            impLine(
+                    one.getX(),
+                    one.getY(),
+                    one.getX(),
+                    one.getBottomY(),
+                    two.getX(),
+                    two.getY()) < 0;
     }
 
-    public boolean detectVerticalLine(HitBox hb, int x, int y, int height) {
-        boolean left = impLine(x, y, x, y+height, hb.getPositionX(), hb.getPositionY()) > 0;
-        boolean right = impLine(x, y, x, y+height, hb.getPositionX(), hb.getPositionY()) < 0;
-        return left || right;
-        
-    }
-
-    public boolean detectCollisionTop(HitBox one, HitBox two) {
-        calculatePositions(one, two);
-        int bottom = oneBottom - two.getPositionY();
-        int top = twoBottom - one.getPositionY();
-        int left = twoRight - one.getPositionX();
-        int right = oneRight - two.getPositionX();
-
-        return top < bottom && top < left && top < right;
-    }
-
-    public boolean detectCollisionBottom(HitBox one, HitBox two) {
-        calculatePositions(one, two);
-        int bottom = oneBottom - two.getPositionY();
-        int top = twoBottom - one.getPositionY();
-        int left = twoRight - one.getPositionX();
-        int right = oneRight - two.getPositionX();
-        return bottom < top && bottom < right && bottom < left;
+    private boolean rightHandCollision(HitBox one, HitBox two) {
+        return
+            impLine(
+                    one.getX(),
+                    one.getY(),
+                    one.getRightX(),
+                    one.getY(),
+                    two.getRightX(),
+                    two.getY()) > 0 &&
+            impLine(
+                    one.getRightX(),
+                    one.getY(),
+                    one.getRightX(),
+                    one.getBottomY(),
+                    two.getRightX(),
+                    two.getY()) > 0 &&
+            impLine(
+                    one.getX(),
+                    one.getBottomY(),
+                    one.getRightX(),
+                    one.getBottomY(),
+                    two.getRightX(),
+                    two.getY()) < 0 &&
+            impLine(
+                    one.getX(),
+                    one.getY(),
+                    one.getX(),
+                    one.getBottomY(),
+                    two.getRightX(),
+                    two.getY()) < 0;
     }
 
     public boolean detectCollisionLeft(HitBox one, HitBox two) {
-        calculatePositions(one, two);
-        int bottom = oneBottom - two.getPositionY();
-        int top = twoBottom - one.getPositionY();
-        int left = twoRight - one.getPositionX();
-        int right = oneRight - two.getPositionX();
-        return left < top && left < bottom && left < right;
+        return two.getDirection() > (3*PI)/4 && two.getDirection() < (5*PI)/4;
     }
 
     public boolean detectCollisionRight(HitBox one, HitBox two) {
-        calculatePositions(one, two);
-        int bottom = oneBottom - two.getPositionY();
-        int top = twoBottom - one.getPositionY();
-        int left = twoRight - one.getPositionX();
-        int right = oneRight - two.getPositionX();
-        return right < top && right < bottom && right < left;
+        return (one.getX() - two.getX()) > (two.getRightX() - one.getRightX());
     }
 }
