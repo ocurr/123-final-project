@@ -11,10 +11,12 @@ public class HitBox extends GameObject {
     private box b;
 
     private PVector position;
+    private PVector lastPosition;
 
     HitBox() {
         b = new box();
         position = new PVector(0,0);
+        lastPosition = position;
     }
 
     HitBox(int x, int y, int endX, int endY) {
@@ -24,6 +26,7 @@ public class HitBox extends GameObject {
         b.width = endX - b.x;
         b.height = endY - b.y;
         position = new PVector(0,0);
+        lastPosition = position;
 
     }
 
@@ -52,6 +55,7 @@ public class HitBox extends GameObject {
         b.height = b.height-b.y;
         b.width = b.width-b.x;
         position = new PVector(0,0);
+        lastPosition = position;
     }
 
     public void setOffsetX(int x) {
@@ -92,10 +96,12 @@ public class HitBox extends GameObject {
 
 
     public void setPositionX(int x) {
+        lastPosition.x = position.x;
         position.set(x, position.y);
     }
 
     public void setPositionY(int y) {
+        lastPosition.y = position.y;
         position.set(position.x, y);
     }
 
@@ -119,6 +125,10 @@ public class HitBox extends GameObject {
         return position;
     }
 
+    public PVector getLastPosition() {
+        return lastPosition;
+    }
+
     public float getDirection() {
         return position.heading();
     }
@@ -132,6 +142,7 @@ public class HitBox extends GameObject {
     }
 
     public void setPosition(int x, int y) {
-        position.set(x,y);
+        setPositionX(x);
+        setPositionY(y);
     }
 }

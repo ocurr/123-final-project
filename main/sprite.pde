@@ -73,11 +73,19 @@ public class Sprite extends GameObject {
     }
 
     public boolean didCollideLeft(HitBox other) {
-        return didCollide(other) && collider.detectCollisionLeft(hb, other);
+        return collider.detectCollisionLeft(hb, other);
     }
 
     public boolean didCollideRight(HitBox other) {
-        return didCollide(other) && collider.detectCollisionRight(hb, other);
+        return collider.detectCollisionRight(hb, other);
+    }
+
+    public boolean didCollideTop(HitBox other) {
+        return collider.detectCollisionTop(hb, other);
+    }
+
+    public boolean didCollideBottom(HitBox other) {
+        return collider.detectCollisionBottom(hb, other);
     }
 
     public void drawHitRect() {
