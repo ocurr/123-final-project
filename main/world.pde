@@ -12,6 +12,9 @@ public class World extends GameObject {
     private HashMap<Character,Boolean> keys;
 
     private int gravity;
+    private int jumpHeight;
+    private int jumpRate;
+    private boolean jumped;
 
     public World() {
         levels = new ArrayList<Level>();
@@ -20,6 +23,9 @@ public class World extends GameObject {
         camera = new Camera();
 
         gravity = 5;
+        jumpHeight = 0;
+        jumpRate = 1;
+        jumped = false;
 
         keys = new HashMap<Character,Boolean>();
         keys.put('d',false);
@@ -28,8 +34,6 @@ public class World extends GameObject {
         keys.put('A',false);
         keys.put('w',false);
         keys.put('W',false);
-        keys.put('s',false);
-        keys.put('S',false);
 
         character = new Sprite(spritePath + "character.png");
     }
@@ -84,11 +88,19 @@ public class World extends GameObject {
         if (keys.get('a') || keys.get('A')) {
             dx = -5;
         }
-        if (keys.get('w') || keys.get('W')) {
-            dy = -10;
+        if ((keys.get('w') || keys.get('W')) && !jumped) {
+            jumped = true;
+            jumpHeight = 17;
         }
 
-        character.move(new PVector(dx,dy+gravity));
+        character.move(new PVector(dx,dy+(gravity-jumpHeight)));
+
+        jumpHeight -= jumpRate;
+        if (jumpHeight <= 0) {
+            jumped = false;
+            jumpHeight = 0;
+        }
+
         if (character.getX() > width/2) {
             camera.setPosition(-(character.getX()-width/2), 0);
         }
