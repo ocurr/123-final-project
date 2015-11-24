@@ -16,6 +16,13 @@ public class Sprite extends GameObject {
         collider = new Collider();
     }
 
+    public Sprite(int x, int y, int width, int height) {
+        img= null;
+        hb = new HitBox(0,0,width,height);
+        hb.setPosition(x,y);
+        collider = new Collider();
+    }
+
     public float getImageOffsetX() {
         return hb.getOffsetX();
     }
@@ -45,7 +52,7 @@ public class Sprite extends GameObject {
     }
 
     public void move(PVector p) {
-        hb.getPosition().add(p);
+        setPosition((int)(hb.getPosition().x+p.x), (int)(hb.getPosition().y+p.y));
     }
 
     public int getX() {

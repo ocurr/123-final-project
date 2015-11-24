@@ -16,7 +16,7 @@ public class HitBox extends GameObject {
     HitBox() {
         b = new box();
         position = new PVector(0,0);
-        lastPosition = position;
+        lastPosition = new PVector(0,0);
     }
 
     HitBox(int x, int y, int endX, int endY) {
@@ -26,7 +26,7 @@ public class HitBox extends GameObject {
         b.width = endX - b.x;
         b.height = endY - b.y;
         position = new PVector(0,0);
-        lastPosition = position;
+        lastPosition = new PVector(0,0);
 
     }
 
@@ -55,7 +55,7 @@ public class HitBox extends GameObject {
         b.height = b.height-b.y;
         b.width = b.width-b.x;
         position = new PVector(0,0);
-        lastPosition = position;
+        lastPosition = new PVector(0,0);
     }
 
     public void setOffsetX(int x) {
@@ -96,21 +96,25 @@ public class HitBox extends GameObject {
 
 
     public void setPositionX(int x) {
-        lastPosition.x = position.x;
+        if (x != position.x) {
+            lastPosition.x = position.x;
+        }
         position.set(x, position.y);
     }
 
     public void setPositionY(int y) {
-        lastPosition.y = position.y;
+        if (y != position.y) {
+            lastPosition.y = position.y;
+        }
         position.set(position.x, y);
     }
 
     public int getWidth() {
-        return b.width+1;
+        return b.width;
     }
 
     public int getHeight() {
-        return b.height+1;
+        return b.height;
     }
 
     public int getX() {

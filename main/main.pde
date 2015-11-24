@@ -13,10 +13,11 @@ void setup() {
     world.addLevel(levelPath + "level1.png");
 
     world.init();
+
+    noStroke();
 }
 
 void mousePressed() {
-  
 }
 
 void keyPressed() {
@@ -28,6 +29,6 @@ void keyReleased() {
 }
 
 void draw() {
-    background(255);
+    background(0);
     world.update();
 }

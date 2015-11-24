@@ -85,21 +85,13 @@ public class World extends GameObject {
             dx = -5;
         }
         if (keys.get('w') || keys.get('W')) {
-            dy = -5;
-        }
-        if (keys.get('s') || keys.get('S')) {
-            dy = 5;
+            dy = -10;
         }
 
-        //XXX add gravity back when done testing collisions
-        character.move(new PVector(dx,dy));
-        println(character.getDirection());
+        character.move(new PVector(dx,dy+gravity));
         if (character.getX() > width/2) {
             camera.setPosition(-(character.getX()-width/2), 0);
         }
-        //camera.setPosition(-character.getX(),-character.getY());
-
-        //println(character.getX());
 
         camera.set();
         pushMatrix();
