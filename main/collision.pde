@@ -1,4 +1,5 @@
 
+// detects collisions between two hitboxes
 class Collider {
 
     public Collider() {
@@ -8,11 +9,18 @@ class Collider {
         return (y1 - y2)*x + (x2-x1)*y + x1*y2 - x2*y1;
     }
 
+    /***
+        all collision detection functions follow the standard of
+        hitbox two is colliding with hitbox one
+    ***/
+
+    // full total collision
     public boolean detectCollision(HitBox one, HitBox two) {
         return leftHandCollision(one,two) || rightHandCollision(one,two);
     }
 
 
+    // collide on the left
     private boolean leftHandCollision(HitBox one, HitBox two) {
         return
             (impLine(
@@ -74,6 +82,7 @@ class Collider {
                     two.getBottomY()) < 0);
     }
 
+    // collide on the right
     private boolean rightHandCollision(HitBox one, HitBox two) {
         return
             (impLine(
@@ -135,6 +144,7 @@ class Collider {
                     two.getBottomY()) < 0);
     }
 
+    // collide from the left
     public boolean detectCollisionLeft(HitBox one, HitBox two) {
             return 
                 two.getLastPosition().x < two.getPosition().x &&
@@ -143,6 +153,7 @@ class Collider {
                 detectCollision(one,two);
     }
 
+    // collide from the right
     public boolean detectCollisionRight(HitBox one, HitBox two) {
         return
             two.getLastPosition().x > two.getPosition().x &&
@@ -151,6 +162,7 @@ class Collider {
             detectCollision(one,two);
     }
 
+    // collide from the top
     public boolean detectCollisionTop(HitBox one, HitBox two) {
         return
             two.getLastPosition().y < two.getPosition().y &&
@@ -159,6 +171,7 @@ class Collider {
             detectCollision(one,two);
     }
 
+    // collide from the bottom
     public boolean detectCollisionBottom(HitBox one, HitBox two) {
         return
             two.getLastPosition().y > two.getPosition().y &&

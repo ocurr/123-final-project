@@ -1,4 +1,6 @@
 
+// World is an object that handles what a player can
+// see and do in the game e.g. menu, levels, cutscenes, etc...
 public class World extends GameObject {
     
     private ArrayList<Level> levels;
@@ -35,17 +37,26 @@ public class World extends GameObject {
         keys.put('w',false);
         keys.put('W',false);
 
+        // sprites are initialized in the same way as a level
         character = new Sprite(spritePath + "character.png");
     }
 
+    // takes in the path to a level and adds the resulting object to
+    // the arraylist
     public void addLevel(String levelPath) {
         levels.add(new Level(levelPath));
     }
 
+    // takes in the requested level and checks whether it is
+    // a valid level
+    // TODO: there is a better way of doing this
+    //       involving the actual level arraylist
     public void setCurrentLevel(int level) {
+        // look up the '?' operator if this confuses you
         currentLevel = level-1 < 0 ? 0 : level-1;
     }
 
+    // increases the current level by one
     public void incrementCurrentLevel() {
         if (currentLevel < levels.size()) {
             currentLevel++;
@@ -54,6 +65,7 @@ public class World extends GameObject {
         }
     }
 
+    // decreases the current level by one
     public void decrementLevel() {
         if (currentLevel > 0) {
             currentLevel--;
@@ -62,6 +74,7 @@ public class World extends GameObject {
         }
     }
 
+    // updates each known key's value
     public void updateKeyPress(char key) {
         keys.put(key,true);
     }
@@ -70,12 +83,15 @@ public class World extends GameObject {
         keys.put(key,false);
     }
 
+    // initialize the first level
     @Override
     public void init() {
         levels.get(0).init(camera);
         levels.get(0).grabCharacter(character);
     }
 
+    // update the world
+    // this includes character controls, the camera, and the current level
     @Override
     public void update() {
 

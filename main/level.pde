@@ -1,4 +1,5 @@
 
+// Level is an object that handles individual levels
 public class Level extends GameObject {
 
     private Sprite background;
@@ -11,6 +12,7 @@ public class Level extends GameObject {
 
     ArrayList<Sprite> platforms;
 
+    // takes in a path to the background image
     public Level(String levelPath) {
         background = new Sprite(levelPath);
         background.setPosition(0,0);
@@ -40,23 +42,31 @@ public class Level extends GameObject {
         platforms.get(2).setPosition(width/3+22,height-(height/3)+18);
     }
 
+    // get the width of the level
     public int getWidth() {
         return background.getWidth();
     }
 
+    // get the height of the level
     public int getHeight() {
         return background.getHeight();
     }
 
+    // this allows the level to access the character object
+    // and sets it's initial position in the level
     public void grabCharacter(Sprite c) {
         character = c;
         character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
     }
 
+    // takes in the camera and sets it's bounds to the bouds of the level
     public void init(Camera cam) {
         cam.setBounds(0,0,getWidth(),getHeight());
     }
 
+    // update the level
+    // draws the background and anything else in the level
+    // and checks for collisions between the character and anything in the level
     @Override
     public void update() {
         pushMatrix();
