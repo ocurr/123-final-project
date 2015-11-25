@@ -1,6 +1,6 @@
 //Emily Guerra Lab 9
 //dinosaur for Final Project - Dino Disaster! 
-
+float dinoy;
 
 float rotTHIGH;
 float rotTHIGH2;
@@ -25,6 +25,8 @@ float py[];
 float vx[];
 float vy[];
 
+int pressedKey;
+int time, wait;
 
 void setup() {
 
@@ -41,6 +43,10 @@ void setup() {
   dy = 0;
   bx = 0;
   by = 300;
+  dinoy = 0;
+  pressedKey = 32;
+  wait = 1000;
+  
 }
 
 void draw() {
@@ -55,7 +61,7 @@ void draw() {
 void drawDino() {
   pushMatrix();
   scale(.4);
-  translate(dx, 250);
+  translate(dx, 250+dinoy);
   //scales and translates whole dino (dx can move it across screen)
 
   pushMatrix(); 
@@ -305,8 +311,18 @@ void animate() {
   }
 
 
-  //  if (dinoEnter == true) {
-  //    dx+= 2;
-  //  }
+   //if (dinoEnter == true) {
+   //  dx+= 2;
+   //}
   //Activate above to make dinosaur walk across screen
+}
+
+
+void keyPressed() {
+  if(keyCode == UP) {
+   dinoy = dinoy - 50;
+  }
+  if(keyCode == DOWN) {
+   dinoy = dinoy + 50;
+  }
 }
