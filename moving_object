@@ -1,0 +1,32 @@
+int ballX, ballY;
+int pressedKey;
+int time, wait;
+
+void setup() {
+   ballX = 15;
+   ballY = height/2;
+   pressedKey = 32;
+   wait = 1000;
+   size(400, 400);
+}
+
+void draw() {
+   background(255);
+   fill(255, 0, 0);
+   ellipse(ballX, ballY, 30, 30);
+   
+   ballX++;
+   
+   if(ballX > width + 15) {
+     ballX = 15;
+   }
+}
+
+void keyPressed() {
+  if(keyCode == UP) {
+   ballY = ballY - 30;
+  }
+  if(keyCode == DOWN) {
+   ballY = ballY + 30;
+  }
+}
