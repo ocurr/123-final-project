@@ -1,0 +1,41 @@
+PVector Cloc;
+PVector dir;
+float time;
+
+boolean animate = false;
+
+void setup() {
+  size(400, 400, P3D);
+  smooth();
+  background(255);
+  Cloc = new PVector(width*.9, height/1.5);
+  dir = new PVector(-1, 0);
+  time = 0.8;
+}
+
+void icecube() {
+  pushMatrix();
+  translate(Cloc.x, Cloc.y);
+  fill(154, 219, 234);
+  stroke(115, 178, 193);
+  box (40);
+  popMatrix();
+}
+
+void animate() {
+  //updating the cubes location over time
+  Cloc.x = Cloc.x + dir.x * time;
+  Cloc.y = Cloc.y + dir.y * time;
+}
+
+void draw() {
+  icecube();
+  if (animate) {
+    animate();
+  }
+}
+
+void mousePressed() {
+  Cloc.x = width*.9;
+  animate =! animate;
+}
