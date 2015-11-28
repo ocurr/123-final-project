@@ -29,6 +29,7 @@ void animate() {
 }
 
 void draw() {
+background(255);
   icecube();
   if (animate) {
     animate();
