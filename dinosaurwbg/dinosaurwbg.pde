@@ -1,5 +1,4 @@
-//Emily Guerra Lab 9
-//dinosaur for Final Project - Dino Disaster! 
+//Opening cutscene 
 
 PImage background;
 PImage text;
@@ -28,7 +27,7 @@ float py[];
 float vx[];
 float vy[];
 color ballC[];
-int numBalls;
+int numflakes;
 float count=0;
 
 void setup() {
@@ -51,31 +50,28 @@ void setup() {
   by = 300;
   println(background.width, background.height);
 
-  numBalls = 20;
-  px = new float[numBalls];
-  py = new float[numBalls];
-  vx = new float[numBalls];
-  vy = new float[numBalls];
-  ballC = new color[numBalls];
-  for (int i=0; i <numBalls; i++) {
+  numflakes = 20;
+  px = new float[numflakes];
+  py = new float[numflakes];
+  vx = new float[numflakes];
+  vy = new float[numflakes];
+  ballC = new color[numflakes];
+  for (int i=0; i <numflakes; i++) {
     px[i] = random(-150, 150);
     py[i] = random(0, 100);
-    vx[i] = random(-.5, .5);
-    vy[i] = random(.5, 1);
+    vx[i] = random(-.05, .05);
+    vy[i] = random(.05, .1);
     ballC[i] = color(random(250, 255), random(250, 255), random(250, 255));
   }
 }
 
 void draw() {
   count++;
-  // background(193, 242, 238);
+
   pushMatrix();
 
   image(background, 0, 0);
   popMatrix();
-  // fill(187, 206, 44);
-  //rect(0, 2*height/3, width, height/3);
-
 
 
   drawDino();
@@ -96,11 +92,11 @@ void draw() {
     ellipse(240, 130, 30, 30);
     ellipse(300, 100, 50, 50);
     ellipse(400, 50, 250, 200);
-    
-pushMatrix();
-scale(.3);
-image(nest, 950, 140);
-popMatrix();
+
+    pushMatrix();
+    scale(.3);
+    image(nest, 950, 140);
+    popMatrix();
 
     fill(223, 229, 157);
     ellipse(400, 50, 40, 60);
@@ -122,7 +118,6 @@ popMatrix();
     image(text, -2700, -200);
 
     image(text2, -2700, -200);
-    
   }
 
 
@@ -140,14 +135,14 @@ void drawDino() {
   translate(THIGHx, THIGHy-150);
   rotate(rotTHIGH2);
   translate(0, 150);
-  // fill(209, 68, 40);
+
   fill(183, 48, 24);
   ellipse(50, -20, 150, 300);
 
   translate(35, 90);
 
   rotate(rotLEG2);
-  // translate(0, 150);
+
 
   rect(50, -20, -80, 150);
   translate(50, -20);
@@ -167,30 +162,13 @@ void drawDino() {
 
 
   pushMatrix();
-
-
-  //translate(910, 415);
-  //rotate(-.5);
-  //translate(-910, -415);
-  //pushMatrix();
-  //fill(255, 249, 219);
-  //translate(15, -10);
-  //translate(910, 415);
-  //rotate(rotARM);
-  //translate(-910, -415);
-  //ellipse(1250, 310, 20, 30);
-  //ellipse(1220, 305, 20, 30);
-  //ellipse(1190, 300, 20, 30);
-  //popMatrix();
-
-
   pushMatrix();
   translate(10, -15);
   translate(910, 415);
   rotate(-rotARM-.01);
   translate(-910, -415);
   beginShape();
-  // fill(209, 68, 40);
+
   fill(183, 48, 24);
   vertex(910, 415);
   bezierVertex(896, 389, 881, 385, 937, 381);
@@ -222,13 +200,7 @@ void drawDino() {
   fill(245, 115, 89);
   noStroke();
   vertex(942, 137);
-  //bezierVertex(955, 94, 992, 60, 1045, 108);
-  //bezierVertex(1142, 84, 1160, 84, 1172, 111);
-  //bezierVertex(1178, 121, 1190, 113, 1188, 139);
-  //vertex(1074, 181);
-  //vertex(1190, 201);
-  //vertex(1183, 222);
-  //  bezierVertex(1135, 229, 1126, 216, 1086, 227);
+
   bezierVertex(1088, 272, 1081, 275, 1007, 311);
   bezierVertex(976, 463, 856, 727, 535, 603);
   bezierVertex(129, 712, 64, 704, 34, 615);
@@ -257,16 +229,11 @@ void drawDino() {
     translate(-942, -137);
   }
 
-  //pushMatrix();
   fill(255, 249, 219);
-  //translate(15, -10);
-  //translate(900, 100);
-  //rotate(rotARM);
-  //translate(-900, -100);
   ellipse(1160, 150, 20, 30);
   ellipse(1130, 160, 20, 30);
   ellipse(1100, 165, 20, 30);
-  //popMatrix();
+
   ////teeth
 
 
@@ -282,7 +249,6 @@ void drawDino() {
   vertex(1183, 222);
   bezierVertex(1135, 229, 1126, 216, 1086, 227);
   bezierVertex(990, 263, 1002, 250, 942, 137); 
-  //bezierVertex(1088, 272, 1081, 275, 1007, 311);
   endShape();
   //head
 
@@ -359,8 +325,6 @@ void drawDino() {
 
   translate(50, 110);
   rotate(-rotLEG+.8);
-  // translate(0, 150);
-  // fill(200,200,0);
   rect(0, 0, -80, 150);
   pushMatrix();
   translate(-80, 150);
@@ -385,15 +349,31 @@ void drawCloud() {
 }
 
 void drawSnow() {
-  for (int i=0; i < numBalls; i++) {
-    //draw the ball
-    fill(ballC[i]);
-    ellipse(px[i], py[i], 10, 10);
-    //update position based on velocity
-    px[i] += vx[i];
-    py[i] += vy[i];
+  float x;
+  float y;
+  float radi = 20;
+  for (int i=0; i < numflakes; i++) {
+    //draw the flakes
+    fill(255, 200);
+    beginShape();
+    for (int j =0; j < 360; j+=15) {
+      if (j%2 == 0) {
+        radi = 15;
+      } else {
+        radi = 3;
+      }
+      x = px[i] + radi*cos(radians(j));
+      y = py[i] + radi*sin(radians(j));
+      vertex(x, y);
+      px[i] += vx[i];
+      py[i] += vy[i];
+    }
+
+    endShape();
   }
 }
+
+
 
 
 void animate() {
@@ -443,29 +423,13 @@ void animate() {
     rotLEG += .006;
     rotARM -= .003;
   }
-  /*
-  if (rotLEG2 < -.3) {
-   THIGHmove = true;
-   } 
-   if (rotLEG2 > 1.4) {
-   THIGHmove = false;
-   }
-   */
+
+
   if (THIGHmove == true) {
     rotLEG2-= .006;
   } else {
     rotLEG2 += .006;
   }
-
-  //if (dx > 590) {
-
-  //  dinoEnter = false;
-  //  THIGHmove = false;
-
-  //  dy = 0;
-  //} else {
-  //  dinoEnter = true;
-  //}
 
   if (dinoEnter == true) {
     dx+= 2;

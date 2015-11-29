@@ -34,14 +34,14 @@ float px[];
 float py[];
 float vx[];
 float vy[];
-color ballC[];
-int numBalls;
+color flakeC[];
+int numflakes;
 float count=0;
 
 void setup() {
 
   background = loadImage("background2.png");
- 
+
   nest = loadImage("nest.png");
   rock = loadImage("rock.png");
   smoke = loadImage("smoke.png");
@@ -64,57 +64,55 @@ void setup() {
   ry = 0;
   println(background.width, background.height);
 
-  numBalls = 20;
-  px = new float[numBalls];
-  py = new float[numBalls];
-  vx = new float[numBalls];
-  vy = new float[numBalls];
-  ballC = new color[numBalls];
-  for (int i=0; i <numBalls; i++) {
-    px[i] = random(-150, 150);
+  numflakes = 20;
+  px = new float[numflakes];
+  py = new float[numflakes];
+  vx = new float[numflakes];
+  vy = new float[numflakes];
+  flakeC = new color[numflakes];
+  for (int i=0; i <numflakes; i++) {
+    px[i] = random(-100, 150);
     py[i] = random(0, 100);
-    vx[i] = random(-.5, .5);
-    vy[i] = random(.5, 1);
-    ballC[i] = color(random(250, 255), random(250, 255), random(250, 255));
+    vx[i] = random(-.05, .05);
+    vy[i] = random(.05, .1);
+    flakeC[i] = color(random(250, 255), random(250, 255), random(250, 255));
   }
 }
 
 void draw() {
-  if (count <530){
+  if (count <530) {
     count++;
   }
- 
-  
   pushMatrix();
   image(background, 0, 0);
   popMatrix();
-  
+
   pushMatrix();
   pushMatrix();
-scale(.3);
-translate(400/.3, 1200);
-image(nest, 950, 140);
-popMatrix();
-    translate(400, 1200*.3);
-    fill(223, 229, 157);
-    ellipse(400, 50, 40, 60);
-    pushMatrix();
-    fill(202, 209, 131);
-    translate(380, 50);
-    rotate(radians(-40));
-    translate(-380, -50);
-    ellipse(360, 50, 40, 60);
-    popMatrix();
-    pushMatrix();
-    translate(420, 50);
-    rotate(radians(30));
-    translate(-420, -50);
-    ellipse(430, 50, 40, 60);
-    popMatrix();
-    popMatrix();
- 
- pushMatrix();
- scale(1);
+  scale(.3);
+  translate(400/.3, 1200);
+  image(nest, 950, 140);
+  popMatrix();
+  translate(400, 1200*.3);
+  fill(223, 229, 157);
+  ellipse(400, 50, 40, 60);
+  pushMatrix();
+  fill(202, 209, 131);
+  translate(380, 50);
+  rotate(radians(-40));
+  translate(-380, -50);
+  ellipse(360, 50, 40, 60);
+  popMatrix();
+  pushMatrix();
+  translate(420, 50);
+  rotate(radians(30));
+  translate(-420, -50);
+  ellipse(430, 50, 40, 60);
+  popMatrix();
+  popMatrix();
+
+  pushMatrix();
+  scale(1);
   drawDino();
   if (dx < 590) {
     animate();
@@ -127,27 +125,23 @@ popMatrix();
     ellipse(150, 50, 200, 100);
     ellipse(150, 0, 100, 100);
     ellipse(-150, 50, 150, 100);
-    
   }
-popMatrix();
+  popMatrix();
   pushMatrix();
-   drawMeteor();
-   if (rx <1000){
+  drawMeteor();
+  if (rx <1000) {
     animateROCK();
   }
-  
-   if (rx > 900){
-     drawBOOM();
-     
-   }
-   
-   if (count > 528){
-     image(end, 0, 0);
-   }
-  
- popMatrix();
- 
 
+  if (rx > 900) {
+    drawBOOM();
+  }
+
+  if (count > 528) {
+    image(end, 0, 0);
+  }
+
+  popMatrix();
 
   println(rotTHIGH, THIGHmove, rotLEG, LEGmove, count);
 }
@@ -185,11 +179,10 @@ void drawDino() {
 
   pushMatrix();
   translate(0, 50+dy);
-  if (dx >500){
+  if (dx >500) {
     translate(800, 450);
     rotate(rotTHIGH/2);
     translate(-800, -450);
-    
   }
 
 
@@ -316,8 +309,6 @@ void drawDino() {
   //eye
   popMatrix();
   popMatrix();
-
-
   pushMatrix();
   fill(209, 68, 40);
   translate(910, 415);
@@ -378,18 +369,38 @@ void drawCloud() {
 }
 
 void drawSnow() {
-  for (int i=0; i < numBalls; i++) {
+  float x;
+  float y;
+  float radi = 20;
+  for (int i=0; i < numflakes; i++) {
     //draw the ball
-    fill(ballC[i]);
-    ellipse(px[i], py[i], 10, 10);
-    //update position based on velocity
-    px[i] += vx[i];
-    py[i] += vy[i];
+    fill(255, 200);
+    beginShape();
+    for (int j =0; j < 360; j+=15) {
+      if (j%2 == 0) {
+        radi = 15;
+      } else {
+        radi = 3;
+      }
+      x = px[i] + radi*cos(radians(j));
+      y = py[i] + radi*sin(radians(j));
+      vertex(x, y);
+      px[i] += vx[i];
+      py[i] += vy[i];
+    }
+
+    endShape();
   }
 }
 
-void drawMeteor(){
-  
+
+
+
+
+
+
+void drawMeteor() {
+
   pushMatrix();
   translate(-300, -200);
   translate(rx, ry);
@@ -398,36 +409,35 @@ void drawMeteor(){
   image(smoke, -2900, -2300);
   popMatrix();
   pushMatrix();
- 
+
   translate(300, 300);
   rotate(rotROCK);
   translate(-450, -400);
-  
+
   image(fire, 0, 0);
   popMatrix();
   image(rock, 0, 0);
   popMatrix();
-  
 }
 
-void drawBOOM(){
-  if (count%3 == 0){
-  fill(255, 0, 0);
-  }else if (count%2 ==0 ){
+void drawBOOM() {
+  if (count%3 == 0) {
+    fill(255, 0, 0);
+  } else if (count%2 ==0 ) {
     fill(255);
-  }else{
+  } else {
     fill(255, 250, 0);
   }
-  rect(0,0, width, height);
-  
-    if (count%3 == 0){
-  fill(255);
-  }else if (count%2 ==0 ){
+  rect(0, 0, width, height);
+
+  if (count%3 == 0) {
+    fill(255);
+  } else if (count%2 ==0 ) {
     fill(255, 250, 0);
-  }else{
+  } else {
     fill(255, 0, 0);
   }
-//  fill(255);
+  //  fill(255);
   beginShape();
   vertex(width, 0);
   vertex(width, height);
@@ -436,15 +446,15 @@ void drawBOOM(){
   vertex(212, 219);
   vertex(150, 0);
   endShape();
-  
-    if (count%3 == 0){
-  fill(255, 250, 0);
-  }else if (count%2 ==0 ){
+
+  if (count%3 == 0) {
+    fill(255, 250, 0);
+  } else if (count%2 ==0 ) {
     fill(255, 0, 0);
-  }else{
+  } else {
     fill(255);
   }
-//  fill(255, 250, 0);
+  //  fill(255, 250, 0);
   beginShape();
   vertex(width, 0);
   vertex(width, height);
@@ -453,15 +463,15 @@ void drawBOOM(){
   vertex(334, 275);
   vertex(232, 0);
   endShape();
-  
-    if (count%3 == 0){
-  fill(255, 0, 0);
-  }else if (count%2 ==0 ){
+
+  if (count%3 == 0) {
+    fill(255, 0, 0);
+  } else if (count%2 ==0 ) {
     fill(255);
-  }else{
+  } else {
     fill(255, 250, 0);
   }
-//  fill(255,0,0);
+  //  fill(255,0,0);
   beginShape();
   vertex(323, 0);
   vertex(408, 0);
@@ -474,15 +484,15 @@ void drawBOOM(){
   vertex(47, height);
   vertex(471, 298);
   endShape();
-  
-    if (count%3 == 0){
-  fill(255);
-  }else if (count%2 ==0 ){
+
+  if (count%3 == 0) {
+    fill(255);
+  } else if (count%2 ==0 ) {
     fill(255, 250, 0);
-  }else{
+  } else {
     fill(255, 0, 0);
   }
-//  fill(255);
+  //  fill(255);
   beginShape();
   vertex(651, 445);
   vertex(325, 484);
@@ -499,15 +509,15 @@ void drawBOOM(){
   vertex(1011, height);
   vertex(637, height);
   endShape();
-  
-    if (count%3 == 0){
-  fill(255, 250, 0);
-  }else if (count%2 ==0 ){
+
+  if (count%3 == 0) {
+    fill(255, 250, 0);
+  } else if (count%2 ==0 ) {
     fill(255, 0, 0);
-  }else{
+  } else {
     fill(255);
   }
- // fill(255, 250, 0);
+  // fill(255, 250, 0);
   beginShape();
   vertex(798, 485);
   vertex(761, 439);
@@ -527,16 +537,15 @@ void drawBOOM(){
   vertex(813, 435);
   vertex(798, 486);
   endShape();
-  
 }
 
 
-void animateROCK(){
-   rotROCK+= .1;
-   if (dx > 550){
-  rx+=4;
-  ry+=2;
-   }
+void animateROCK() {
+  rotROCK+= .1;
+  if (dx > 550) {
+    rx+=4;
+    ry+=2;
+  }
 }
 
 
@@ -562,7 +571,7 @@ void animate() {
   }
 
 
- 
+
   if ((rotTHIGH > 0 && THIGHmove == true) || (rotTHIGH<0 && THIGHmove == false) ) {
 
     dy += .2;
