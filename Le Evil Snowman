@@ -41,9 +41,11 @@ void drawSnowman() {
     triangle(200, 195, 160, 198, 200, 203); 
   //draw arm that animates 
   pushMatrix();
-    translate(-10, 5);
+ //   translate(10, 15);
+    translate(175, 230);
     rotate(armR);
-    translate(0, 0);
+    translate(-175, -230);
+ //TRANSLATED TO ROTATE AROUND SHOULDER PIVOT
     stroke(160, 86, 16);
     line(175, 230, 120, 210);
     line(120, 210, 105, 220);
@@ -51,9 +53,9 @@ void drawSnowman() {
   popMatrix();
   //2nd arm that animates
   pushMatrix();
-    translate(0, 0);
-    rotate(armR);
-    translate(0, 0);
+    translate(225, 235);
+    rotate(armR2);
+    translate(-225, -235);
     stroke(160, 86, 16);
     line(225, 235, 275, 210);
     line(275, 210, 295, 220);
@@ -68,53 +70,22 @@ void animate() {
   Sloc.y = Sloc.y + dir.y * time;
   
   if (armMove){
-    armR -= 0.08;
+    armR -= 0.02;
   }else{ 
-    armR += 0.08;
+    armR += 0.02;
   }
+//SLOWED ROTATION SPEED
   
-  if (armR < radians(-45)){
+  if (armR < radians(-30)){
     armMove = false;
   }
   
-  if (armR > radians(45)){
+  if (armR > radians(30)){
     armMove = true;
   }
   
   if (armMove2){
-    armR2 -= 0.05;
+    armR2 -= 0.02;
   } else {
-    armR2 += 0.05;
+    armR2 += 0.02;
   }
-  
-  if (armR2 < radians(-45)){
-    armMove2 = false;
-  }
-  
-  if (armR2 > radians(45)){
-    armMove2 = true;
-  }
-}
-
-void setup(){
-  size(400, 400);
-  smooth();
-  armR = radians(50);
-  armR2 = radians(40);
-  Sloc = new PVector(width*.5, height/8);
-  dir = new PVector(-0.5, 0);
-  time = 0.3;
-}
-
-void draw() {
-  background(113, 110, 100);
-  drawSnowman();
-  if (animate){
-    animate();
-  }
-}
-
-void mousePressed(){
-  Sloc.x = width *.5;
-  animate =! animate;
-}
