@@ -168,4 +168,10 @@ public class HitBox extends GameObject {
         setPositionX(x);
         setPositionY(y);
     }
+
+    public void drawHitRect(int offsetX, int offsetY) {
+        pushMatrix();
+        rect(position.x+offsetX,position.y+offsetY,getWidth(),getHeight());
+        popMatrix();
+    }
 }

@@ -6,7 +6,7 @@ public class Level extends GameObject {
     private Sprite backgroundLeft;
     private Sprite backgroundRight;
 
-    private Sprite character;
+    private Dinosaur character;
 
     private HitBox mouse;
 
@@ -54,7 +54,7 @@ public class Level extends GameObject {
 
     // this allows the level to access the character object
     // and sets it's initial position in the level
-    public void grabCharacter(Sprite c) {
+    public void grabCharacter(Dinosaur c) {
         character = c;
         character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
     }
