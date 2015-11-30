@@ -6,12 +6,12 @@ public class Level extends GameObject {
     private Sprite backgroundLeft;
     private Sprite backgroundRight;
 
-<<<<<<< HEAD
-    private Sprite character;
+//<<<<<<< HEAD
+ //   private Sprite character;
     private Sprite eggs;
-=======
+//=======
     private Dinosaur character;
->>>>>>> origin/master
+//>>>>>>> origin/master
 
     private HitBox mouse;
 
@@ -97,6 +97,7 @@ public class Level extends GameObject {
                     (background.getX()+background.getWidth())-character.getWidth());
         }
 
+
         for (int p=0; p<13; p++) {
             Sprite pl = platforms.get(p);
 
@@ -119,5 +120,6 @@ public class Level extends GameObject {
         eggs.update();
 
         popMatrix();
+    
     }
 }
