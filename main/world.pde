@@ -10,6 +10,7 @@ public class World extends GameObject {
     private Camera camera;
 
     private Sprite character;
+    private Dinosaur dino;
 
     private HashMap<Character,Boolean> keys;
 
@@ -39,6 +40,8 @@ public class World extends GameObject {
 
         // sprites are initialized in the same way as a level
         character = new Sprite(spritePath + "character.png");
+
+        dino = new Dinosaur();
     }
 
     // takes in the path to a level and adds the resulting object to
@@ -87,7 +90,7 @@ public class World extends GameObject {
     @Override
     public void init() {
         levels.get(0).init(camera);
-        levels.get(0).grabCharacter(character);
+        levels.get(0).grabCharacter(dino);
     }
 
     // update the world
@@ -99,17 +102,18 @@ public class World extends GameObject {
         dx = dy = 0;
 
         if (keys.get('d') || keys.get('D')) {
-            dx = 5;
+            dx = 10;
         }
         if (keys.get('a') || keys.get('A')) {
-            dx = -5;
+            dx = -10;
         }
         if ((keys.get('w') || keys.get('W')) && !jumped) {
             jumped = true;
-            jumpHeight = 17;
+            jumpHeight = 30;
         }
 
-        character.move(new PVector(dx,dy+(gravity-jumpHeight)));
+        //character.move(new PVector(dx,dy+(gravity-jumpHeight)));
+        dino.move(new PVector(dx,dy+(gravity-jumpHeight)));
 
         jumpHeight -= jumpRate;
         if (jumpHeight <= 0) {
@@ -117,8 +121,8 @@ public class World extends GameObject {
             jumpHeight = 0;
         }
 
-        if (character.getX() > width/2) {
-            camera.setPosition(-(character.getX()-width/2), 0);
+        if (dino.getX()+dino.getHitBox().getWidth() > width/2) {
+            camera.setPosition(-(dino.getX()+dino.getHitBox().getWidth()-width/2), 0);
         }
 
         camera.set();
@@ -126,6 +130,8 @@ public class World extends GameObject {
 
         levels.get(currentLevel).update();
         character.update();
+
+        dino.update();
 
         popMatrix();
         camera.unset();

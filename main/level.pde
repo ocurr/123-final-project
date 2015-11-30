@@ -6,7 +6,12 @@ public class Level extends GameObject {
     private Sprite backgroundLeft;
     private Sprite backgroundRight;
 
+<<<<<<< HEAD
     private Sprite character;
+    private Sprite eggs;
+=======
+    private Dinosaur character;
+>>>>>>> origin/master
 
     private HitBox mouse;
 
@@ -32,14 +37,27 @@ public class Level extends GameObject {
         platforms = new ArrayList<Sprite>();
 
         mouse = new HitBox(0,0,1,1);
+        
+        eggs = new Sprite(spritePath+"eggs.png");
+        eggs.setPosition(width+4900, height-90);
 
-        for (int i=0; i<3; i++) {
+        for (int i=0; i<13; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
         }
 
-        platforms.get(0).setPosition(0,height-(height/6)-10);
-        platforms.get(1).setPosition(width-250,height-(height/5)-10);
-        platforms.get(2).setPosition(width/3+22,height-(height/3)+18);
+        platforms.get(0).setPosition(0,height-60);
+        platforms.get(1).setPosition(width-235, height - 60);
+        platforms.get(2).setPosition(width+15, height-150);
+        platforms.get(3).setPosition(width+400, height-220);
+        platforms.get(4).setPosition(width+500, height - 60);
+        platforms.get(5).setPosition(width+1100, height - 60);
+        platforms.get(6).setPosition(width+1600, height - 60);
+        platforms.get(7).setPosition(width+1800, height -220);
+        platforms.get(8).setPosition(width+2200, height- 220);
+        platforms.get(9).setPosition(width+2800, height-150);
+        platforms.get(10).setPosition(width+3200, height-150);
+        platforms.get(11).setPosition(width+3600, height-60);
+        platforms.get(12).setPosition(width+4500, height-60);
     }
 
     // get the width of the level
@@ -54,7 +72,7 @@ public class Level extends GameObject {
 
     // this allows the level to access the character object
     // and sets it's initial position in the level
-    public void grabCharacter(Sprite c) {
+    public void grabCharacter(Dinosaur c) {
         character = c;
         character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
     }
@@ -79,7 +97,7 @@ public class Level extends GameObject {
                     (background.getX()+background.getWidth())-character.getWidth());
         }
 
-        for (int p=0; p<3; p++) {
+        for (int p=0; p<13; p++) {
             Sprite pl = platforms.get(p);
 
             if (pl.didCollideTop(character.getHitBox())) {
@@ -97,6 +115,8 @@ public class Level extends GameObject {
 
             pl.update();
         }
+        
+        eggs.update();
 
         popMatrix();
     }

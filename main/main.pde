@@ -17,7 +17,7 @@ void setup() {
 
     // add levels here
     // levels are added using the path to their background image
-    world.addLevel(levelPath + "largebg.png");
+    world.addLevel(levelPath + "skyonly.png");
 
     // initialize world
     world.init();
