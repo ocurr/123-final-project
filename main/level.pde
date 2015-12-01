@@ -134,6 +134,7 @@ public class Level extends GameObject {
     if (collider.detectCollisionBottom(character.getHitBox(), snowman.getHitBox())) {
       snowman.setkill();
     }
+<<<<<<< HEAD
 
     eggs.update();
     snowman.update();
@@ -142,4 +143,6 @@ public class Level extends GameObject {
 
     popMatrix();
   }
+=======
+>>>>>>> origin/master
 }

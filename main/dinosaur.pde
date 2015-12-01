@@ -181,11 +181,17 @@ void drawDino(float dx, float dinoy) {
 
   pushMatrix();
   //fill(245, 115, 89);
-  //if (dx>400) {
-  //  translate(942, 137);
-  //  rotate(rotARM);
-  //  translate(-942, -137);
-  //}
+  if (rotTHIGH>0) {
+   translate(942, 137);
+   rotate(-rotTHIGH/3+.1);
+   translate(-942, -137);
+  }
+  
+  if (rotTHIGH<0){
+    translate(942, 137);
+   rotate(rotTHIGH/3+.1);
+   translate(-942, -137);
+  }
   //if active makes dino move head up at certain spot along screen
 
   fill(255, 249, 219);

@@ -48,7 +48,6 @@ private EndScene() {
   smoke = loadImage(endingPath+"smoke.png");
   fire = loadImage(endingPath+"fire.png");
   end = loadImage(endingPath+"end.png");
-  frame.setSize(1034, 510);
 
   rotHEAD = 0;
   rotTHIGH = -.5;
