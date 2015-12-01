@@ -41,7 +41,7 @@ public class Level extends GameObject {
     mouse = new HitBox(0, 0, 1, 1);
 
     eggs = new Sprite(spritePath+"eggs.png");
-    eggs.setPosition(width+4900, height-90);
+    eggs.setPosition(width+4900, height-70);
 
     for (int i=0; i<13; i++) {
       platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));

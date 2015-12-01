@@ -1,5 +1,7 @@
 public class SnowCloud{
   
+  //run every 300 frames to keep constant snow
+  
 float px[];
 float py[];
 float vx[];
