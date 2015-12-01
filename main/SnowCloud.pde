@@ -1,4 +1,5 @@
-
+public class SnowCloud{
+  
 float px[];
 float py[];
 float vx[];
@@ -6,7 +7,7 @@ float vy[];
 color flakeC[];
 int numflakes;
 
-void setup(){
+private SnowCloud(){
   size(400, 400);
  
   numflakes = 20;
@@ -24,7 +25,7 @@ void setup(){
   }
 }
 
-void draw(){
+private void update(){
   noStroke();
   background(125);
   translate(200, 100);
@@ -35,7 +36,7 @@ void draw(){
 }
 
 
-void drawCloud() {
+private void drawCloud() {
   
   scale(.7);
   fill(67, 85, 147);
@@ -45,7 +46,7 @@ void drawCloud() {
   ellipse(-150, 50, 150, 100);
 }
 
-void drawSnow() {
+private void drawSnow() {
   float x;
   float y;
   float radi = 20;
@@ -69,4 +70,5 @@ void drawSnow() {
 
     endShape();
   }
+}
 }

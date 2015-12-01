@@ -2,9 +2,16 @@
 // Level is an object that handles individual levels
 public class Level extends GameObject {
 
-  private Sprite background;
-  private Sprite backgroundLeft;
-  private Sprite backgroundRight;
+    private Sprite background;
+    private Sprite backgroundLeft;
+    private Sprite backgroundRight;
+
+    private Sprite eggs;
+    private Dinosaur character;
+
+    private HitBox mouse;
+
+    ArrayList<Sprite> platforms;
 
   private Sprite eggs;
   private Dinosaur character;
@@ -134,7 +141,6 @@ public class Level extends GameObject {
     if (collider.detectCollisionBottom(character.getHitBox(), snowman.getHitBox())) {
       snowman.setkill();
     }
-<<<<<<< HEAD
 
     eggs.update();
     snowman.update();
@@ -143,6 +149,4 @@ public class Level extends GameObject {
 
     popMatrix();
   }
-=======
->>>>>>> origin/master
 }
