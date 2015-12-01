@@ -37,7 +37,6 @@ private StartScene() {
   text = loadImage(startPath+"text.png");
   text2 = loadImage(startPath+"text2.png");
   nest = loadImage(startPath+ "nest.png");
-  frame.setSize(1034, 510);
 
   rotHEAD = 0;
   rotTHIGH = -.5;
