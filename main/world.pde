@@ -112,7 +112,7 @@ public class World extends GameObject {
     @Override
         public void update() {
             if (mousePressed && !gamestarted){
-                frame.setSize(800,600);
+                surface.setSize(800,600);
                 gamestarted = true;
             }
 
@@ -122,11 +122,11 @@ public class World extends GameObject {
 
 
             if (gameended){
-                frame.setSize(1034, 510);
+                surface.setSize(1034, 510);
                 endscene.update();
             }
             else if (!gamestarted){
-                frame.setSize(1034, 510);
+                surface.setSize(1034, 510);
                 startscene.update();
             } else {
 

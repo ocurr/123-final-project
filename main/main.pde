@@ -13,7 +13,7 @@ void setup() {
     //this size is not final it is the size that I arbitrarily chose
     //to test at
     size(800, 600);
-    frame.setResizable(true);
+    surface.setResizable(true);
     
     // create the game world
     world = new World();
