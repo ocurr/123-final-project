@@ -1,17 +1,54 @@
+public class Snowman extends GameObject {
 PVector Sloc;
 PVector dir;
 float armR, armR2, time;
+float scl;
 
 boolean armMove = false;
 boolean armMove2 = false;
 boolean animate = false;
 
+private HitBox HB;
+
+public Snowman() {
+  //size(400, 400);
+  smooth();
+  armR = radians(50);
+  armR2 = radians(40);
+  //Sloc = new PVector(width*.5, height/8);
+  dir = new PVector(-0.5, 0);
+  time = 0.3;
+  HB = new HitBox(0, 0, 80, 120);
+  HB.setPosition(400, 400);
+}
+public void setPositionX(int x) {
+  HB.setPositionX(x);
+}
+
+public void setPositionY(int y) {
+  HB.setPositionY(y);
+}
+
+public void setPosition(int x, int y){
+  setPositionX(x);
+  setPositionY(y);
+}
+
+public void move(PVector p){
+  setPosition((int)(HB.getPosition().x + p.x), (int)(HB.getPosition().y + p.y));
+}
+
+
 //code to draw the snowman with animation parameters armR and arm2R
-void drawSnowman() {
+void drawSnowman(float dx, float dy) {
+  pushMatrix();
+  translate(dx, dy);
   noStroke();
   smooth();
   pushMatrix();
-    translate(Sloc.x, Sloc.y);
+    translate(-60, -80);
+    scl = 0.5;
+    scale(scl);
     fill(255);
     //body 
     ellipse(200, 300, 100, 85);
@@ -62,6 +99,7 @@ void drawSnowman() {
     line(275, 210, 270, 200);
   popMatrix();
 popMatrix();
+popMatrix();
 }
 
 //updating animation parameters 
@@ -89,3 +127,42 @@ void animate() {
   } else {
     armR2 += 0.02;
   }
+  
+  if (armR2 < radians(-45)){
+    armMove2 = false;
+  }
+  
+  if (armR2 > radians(45)){
+    armMove2 = true;
+  }
+}
+
+/*void setup(){
+  size(400, 400);
+  smooth();
+  armR = radians(50);
+  armR2 = radians(40);
+  Sloc = new PVector(width*.5, height/8);
+  dir = new PVector(-0.5, 0);
+  time = 0.3;
+}*/
+
+void update() {
+  //background(200);
+  drawSnowman(HB.getPosition().x, HB.getPosition().y);
+  //HB.drawHitRect(0, 0);
+  if (animate){
+    animate();
+  }
+  fill(200, 200, 244, 230);
+  //rect(100, 210, 80, 120);
+  if (animate) {
+    animate();
+  }
+}
+
+//void mousePressed(){
+  //Sloc.x = width *.5;
+  //animate =! animate;
+
+}

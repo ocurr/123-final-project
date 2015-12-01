@@ -10,6 +10,8 @@ public class World extends GameObject {
     private Camera camera;
 
     private Dinosaur dino;
+    
+    private Snowman snowman;
 
     private HashMap<Character,Boolean> keys;
 
@@ -38,6 +40,7 @@ public class World extends GameObject {
         keys.put('W',false);
 
         dino = new Dinosaur();
+        snowman = new Snowman();
     }
 
     // takes in the path to a level and adds the resulting object to
@@ -126,6 +129,8 @@ public class World extends GameObject {
         levels.get(currentLevel).update();
 
         dino.update();
+        
+        snowman.update();
 
         popMatrix();
         camera.unset();
