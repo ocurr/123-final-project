@@ -111,7 +111,7 @@ public class World extends GameObject {
     // this includes character controls, the camera, and the current level
     @Override
         public void update() {
-            if (mousePressed){
+            if (mousePressed && !gamestarted){
                 frame.setSize(800,600);
                 gamestarted = true;
             }
