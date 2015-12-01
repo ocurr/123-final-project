@@ -9,7 +9,6 @@ public class World extends GameObject {
 
     private Camera camera;
 
-    private Sprite character;
     private Dinosaur dino;
 
     private HashMap<Character,Boolean> keys;
@@ -37,9 +36,6 @@ public class World extends GameObject {
         keys.put('A',false);
         keys.put('w',false);
         keys.put('W',false);
-
-        // sprites are initialized in the same way as a level
-        character = new Sprite(spritePath + "character.png");
 
         dino = new Dinosaur();
     }
@@ -102,17 +98,16 @@ public class World extends GameObject {
         dx = dy = 0;
 
         if (keys.get('d') || keys.get('D')) {
-            dx = 10;
+            dx = 5;
         }
         if (keys.get('a') || keys.get('A')) {
-            dx = -10;
+            dx = -5;
         }
         if ((keys.get('w') || keys.get('W')) && !jumped) {
             jumped = true;
-            jumpHeight = 30;
+            jumpHeight = 25;
         }
 
-        //character.move(new PVector(dx,dy+(gravity-jumpHeight)));
         dino.move(new PVector(dx,dy+(gravity-jumpHeight)));
 
         jumpHeight -= jumpRate;
@@ -129,7 +124,6 @@ public class World extends GameObject {
         pushMatrix();
 
         levels.get(currentLevel).update();
-        character.update();
 
         dino.update();
 

@@ -175,8 +175,6 @@ class Collider {
 
     // collide from the bottom
     public boolean detectCollisionBottom(HitBox one, HitBox two) {
-        println("lastPosition y: ",two.getLastPosition().y);
-        println("position y: ",two.getPosition().y);
         return
             two.getLastPosition().y > two.getPosition().y &&
             two.getPosition().y <= one.getPosition().y + one.getHeight() &&
