@@ -109,6 +109,7 @@ public class World extends GameObject {
     @Override
     public void update() {
       if (mousePressed){
+        frame.setSize(800,600);
         gamestarted = true;
       }
         if (gameended){
