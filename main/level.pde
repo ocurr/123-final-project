@@ -6,12 +6,8 @@ public class Level extends GameObject {
     private Sprite backgroundLeft;
     private Sprite backgroundRight;
 
-//<<<<<<< HEAD
- //   private Sprite character;
     private Sprite eggs;
-//=======
     private Dinosaur character;
-//>>>>>>> origin/master
 
     private HitBox mouse;
 
@@ -48,12 +44,12 @@ public class Level extends GameObject {
         platforms.get(0).setPosition(0,height-60);
         platforms.get(1).setPosition(width-235, height - 60);
         platforms.get(2).setPosition(width+15, height-150);
-        platforms.get(3).setPosition(width+400, height-220);
+        platforms.get(3).setPosition(width+400, height-235);
         platforms.get(4).setPosition(width+500, height - 60);
         platforms.get(5).setPosition(width+1100, height - 60);
         platforms.get(6).setPosition(width+1600, height - 60);
-        platforms.get(7).setPosition(width+1800, height -220);
-        platforms.get(8).setPosition(width+2200, height- 220);
+        platforms.get(7).setPosition(width+1800, height -240);
+        platforms.get(8).setPosition(width+2200, height- 240);
         platforms.get(9).setPosition(width+2800, height-150);
         platforms.get(10).setPosition(width+3200, height-150);
         platforms.get(11).setPosition(width+3600, height-60);

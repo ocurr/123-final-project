@@ -44,7 +44,7 @@ Dinosaur() {
     pressedKey = 32;
     wait = 1000;
 
-    hb = new HitBox(0,0,(int)(470*0.5),(int)(325*0.5));
+    hb = new HitBox(0,0,(int)(470*0.34),(int)(325*0.34));
     hb.setPosition(0,0);
 }
 
@@ -88,7 +88,7 @@ public void move(PVector p) {
 void update() {
     drawDino(hb.getX(),hb.getY());
     animate();
-    hb.drawHitRect(0,0);
+    //hb.drawHitRect(0,0);
 }
 
 void drawDino(float dx, float dinoy) {
@@ -97,7 +97,7 @@ void drawDino(float dx, float dinoy) {
   translate(dx, dinoy);
 
   pushMatrix();
-  scale(.2,.2);
+  scale(.14,.14);
   translate(-30, -130);
   //scales and translates whole dino (dx can move it across screen)
 

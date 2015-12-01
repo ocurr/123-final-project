@@ -16,7 +16,8 @@ class Collider {
 
     // full total collision
     public boolean detectCollision(HitBox one, HitBox two) {
-        return leftHandCollision(one,two) || rightHandCollision(one,two);
+        return leftHandCollision(one,two) || rightHandCollision(one,two) ||
+                leftHandCollision(two,one) || rightHandCollision(two,one);
     }
 
 
@@ -146,11 +147,11 @@ class Collider {
 
     // collide from the left
     public boolean detectCollisionLeft(HitBox one, HitBox two) {
-            return 
-                two.getLastPosition().x < two.getPosition().x &&
-                two.getPosition().x + two.getWidth() >= one.getPosition().x &&
-                two.getPosition().x <= one.getPosition().x &&
-                detectCollision(one,two);
+        return 
+            two.getLastPosition().x < two.getPosition().x &&
+            two.getPosition().x + two.getWidth() >= one.getPosition().x &&
+            two.getPosition().x <= one.getPosition().x &&
+            detectCollision(one,two);
     }
 
     // collide from the right
@@ -168,15 +169,19 @@ class Collider {
             two.getLastPosition().y < two.getPosition().y &&
             two.getPosition().y + two.getHeight() >= one.getPosition().y &&
             two.getPosition().y <= one.getPosition().y &&
+            two.getPosition().y + two.getHeight() < one.getPosition().y + one.getHeight() &&
             detectCollision(one,two);
     }
 
     // collide from the bottom
     public boolean detectCollisionBottom(HitBox one, HitBox two) {
+        println("lastPosition y: ",two.getLastPosition().y);
+        println("position y: ",two.getPosition().y);
         return
             two.getLastPosition().y > two.getPosition().y &&
             two.getPosition().y <= one.getPosition().y + one.getHeight() &&
-            two.getPosition().y + two.getWidth() >= one.getPosition().y + one.getHeight() &&
+            two.getPosition().y + two.getHeight() >= one.getPosition().y + one.getHeight() &&
+            two.getPosition().y >= one.getPosition().y &&
             detectCollision(one,two);
     }
 }
