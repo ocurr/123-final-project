@@ -135,9 +135,11 @@ public class World extends GameObject {
 
                 if (keys.get('d') || keys.get('D')) {
                     dx = 5;
+                    dino.flipRight();
                 }
                 if (keys.get('a') || keys.get('A')) {
                     dx = -5;
+                    dino.flipLeft();
                 }
                 if ((keys.get('w') || keys.get('W')) && !jumped) {
                     jumped = true;

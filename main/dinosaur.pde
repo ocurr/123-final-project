@@ -28,7 +28,12 @@ float vy[];
 int pressedKey;
 int time, wait;
 
+int scaleMult;
+
 HitBox hb;
+
+float flipOffsetX;
+float flipOffsetY;
 
 Dinosaur() {
 
@@ -44,8 +49,25 @@ Dinosaur() {
     pressedKey = 32;
     wait = 1000;
 
+    scaleMult = 1;
+
+    flipOffsetX = 0;
+    flipOffsetY = 0;
+
     hb = new HitBox(0,0,(int)(470*0.34),(int)(325*0.34));
     hb.setPosition(0,0);
+}
+
+public void flipLeft() {
+   scaleMult = -1; 
+   flipOffsetX = -1300;
+   flipOffsetY = 0;
+}
+
+public void flipRight() {
+    scaleMult = 1;
+    flipOffsetX = 0;
+    flipOffsetY = 0;
 }
 
 public void setPositionX(int x) {
@@ -97,8 +119,10 @@ void drawDino(float dx, float dinoy) {
   translate(dx, dinoy);
 
   pushMatrix();
-  scale(.14,.14);
-  translate(-30, -130);
+  //translate(-30+flipOffsetX, -130+flipOffsetY);
+  translate(-10,-15);
+  scale(.14*scaleMult,.14);
+  translate(flipOffsetX,flipOffsetY);
   //scales and translates whole dino (dx can move it across screen)
 
   pushMatrix(); 
