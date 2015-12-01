@@ -110,61 +110,63 @@ public class World extends GameObject {
     // update the world
     // this includes character controls, the camera, and the current level
     @Override
-    public void update() {
-      if (mousePressed){
-        frame.setSize(800,600);
-        gamestarted = true;
-      }
-     
-     if(dino.getX() >= width+4700){
-       gameended = true;
-     }
-    
-     
-        if (gameended){
-            frame.setSize(1034, 510);
-            endscene.update();
-        }
-        else if (!gamestarted){
-            frame.setSize(1034, 510);
-            startscene.update();
-        }else{
-          
-        int dx, dy;
-        dx = dy = 0;
+        public void update() {
+            if (mousePressed){
+                frame.setSize(800,600);
+                gamestarted = true;
+            }
 
-        if (keys.get('d') || keys.get('D')) {
-            dx = 5;
-        }
-        if (keys.get('a') || keys.get('A')) {
-            dx = -5;
-        }
-        if ((keys.get('w') || keys.get('W')) && !jumped) {
-            jumped = true;
-            jumpHeight = 25;
-        }
+            if(dino.getX() >= width+4700){
+                gameended = true;
+            }
 
-        dino.move(new PVector(dx,dy+(gravity-jumpHeight)));
 
-        jumpHeight -= jumpRate;
-        if (jumpHeight <= 0) {
-            jumped = false;
-            jumpHeight = 0;
-        }
+            if (gameended){
+                frame.setSize(1034, 510);
+                endscene.update();
+            }
+            else if (!gamestarted){
+                frame.setSize(1034, 510);
+                startscene.update();
+            } else {
 
-        if (dino.getX()+dino.getHitBox().getWidth() > width/2) {
-        camera.setPosition(-(dino.getX()+dino.getHitBox().getWidth()-width/2), 0);
-        }
+                int dx, dy;
+                dx = dy = 0;
 
-        camera.set();
-        pushMatrix();
+                if (keys.get('d') || keys.get('D')) {
+                    dx = 5;
+                }
+                if (keys.get('a') || keys.get('A')) {
+                    dx = -5;
+                }
+                if ((keys.get('w') || keys.get('W')) && !jumped) {
+                    jumped = true;
+                    jumpHeight = 25;
+                }
 
-        levels.get(currentLevel).update();
+                dino.move(new PVector(dx,dy+(gravity-jumpHeight)));
 
-        dino.update();
-        
-        //snowman.update();
+                jumpHeight -= jumpRate;
+                if (jumpHeight <= 0) {
+                    jumped = false;
+                    jumpHeight = 0;
+                }
 
-        popMatrix();
-        camera.unset();
-    }
+                if (dino.getX()+dino.getHitBox().getWidth() > width/2) {
+                    camera.setPosition(-(dino.getX()+dino.getHitBox().getWidth()-width/2), 0);
+                }
+
+                camera.set();
+                pushMatrix();
+
+                levels.get(currentLevel).update();
+
+                dino.update();
+
+                //snowman.update();
+
+                popMatrix();
+                camera.unset();
+            }
+            }
+            }

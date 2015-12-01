@@ -6,13 +6,6 @@ public class Level extends GameObject {
     private Sprite backgroundLeft;
     private Sprite backgroundRight;
 
-    private Sprite eggs;
-    private Dinosaur character;
-
-    private HitBox mouse;
-
-    ArrayList<Sprite> platforms;
-
   private Sprite eggs;
   private Dinosaur character;
   private Snowman snowman;
