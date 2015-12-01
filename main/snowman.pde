@@ -7,6 +7,7 @@ float scl;
 boolean armMove = false;
 boolean armMove2 = false;
 boolean animate = false;
+boolean kill = false;
 
 private HitBox HB;
 
@@ -18,8 +19,12 @@ public Snowman() {
   //Sloc = new PVector(width*.5, height/8);
   dir = new PVector(-0.5, 0);
   time = 0.3;
-  HB = new HitBox(0, 0, 80, 120);
+  HB = new HitBox(0, 0, 80, 95);
   HB.setPosition(400, 400);
+}
+
+public void setkill(){
+  kill = true;
 }
 public void setPositionX(int x) {
   HB.setPositionX(x);
@@ -38,6 +43,16 @@ public void move(PVector p){
   setPosition((int)(HB.getPosition().x + p.x), (int)(HB.getPosition().y + p.y));
 }
 
+public int getHeight(){
+  return HB.getHeight();
+}
+
+public int getWidth(){
+  return HB.getWidth();
+}
+public HitBox getHitBox() {
+  return HB;
+}
 
 //code to draw the snowman with animation parameters armR and arm2R
 void drawSnowman(float dx, float dy) {
@@ -104,8 +119,8 @@ popMatrix();
 
 //updating animation parameters 
 void animate() {
-  Sloc.x = Sloc.x + dir.x *time;
-  Sloc.y = Sloc.y + dir.y * time;
+  //Sloc.x = Sloc.x + dir.x *time;
+  //Sloc.y = Sloc.y + dir.y * time;
   
   if (armMove){
     armR -= 0.02;
@@ -148,17 +163,13 @@ void animate() {
 }*/
 
 void update() {
+  if (!kill) {
+    
   //background(200);
   drawSnowman(HB.getPosition().x, HB.getPosition().y);
   //HB.drawHitRect(0, 0);
-  if (animate){
     animate();
-  }
-  fill(200, 200, 244, 230);
-  //rect(100, 210, 80, 120);
-  if (animate) {
-    animate();
-  }
+}
 }
 
 //void mousePressed(){
