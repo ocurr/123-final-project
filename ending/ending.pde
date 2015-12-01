@@ -180,9 +180,9 @@ void drawDino() {
   pushMatrix();
   translate(0, 50+dy);
   if (dx >500) {
-    translate(800, 450);
-    rotate(rotTHIGH/2);
-    translate(-800, -450);
+   translate(800, 450);
+   rotate(rotTHIGH/2);
+   translate(-800, -450);
   }
 
 

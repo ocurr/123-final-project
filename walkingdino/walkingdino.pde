@@ -31,7 +31,7 @@ int time, wait;
 void setup() {
 
 
-  size(700, 589);
+  size(470, 325);
 
   rotHEAD = 0;
   rotTHIGH = -.5;
@@ -61,7 +61,7 @@ void draw() {
 void drawDino() {
   pushMatrix();
   scale(.4);
-  translate(dx, 250+dinoy);
+  translate(dx-30, dinoy-130);
   //scales and translates whole dino (dx can move it across screen)
 
   pushMatrix(); 
