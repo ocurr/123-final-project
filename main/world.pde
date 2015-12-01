@@ -10,17 +10,26 @@ public class World extends GameObject {
     private Camera camera;
 
     private Dinosaur dino;
+<<<<<<< HEAD
 
 
 
     private Snowman snowman;
 
 
+=======
+    
+    private Snowman snowman;
+
+>>>>>>> origin/master
     private EndScene endscene;
     private StartScene startscene;
     private boolean gamestarted = false;
     private boolean gameended = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
     private HashMap<Character,Boolean> keys;
 
@@ -49,16 +58,24 @@ public class World extends GameObject {
         keys.put('W',false);
 
         dino = new Dinosaur();
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         snowman = new Snowman();
 
         endscene = new EndScene();
         startscene = new StartScene();
 
+<<<<<<< HEAD
         snowman = new Snowman();
         endscene = new EndScene();
         startscene = new StartScene();
 
+=======
+        endscene = new EndScene();
+        startscene = new StartScene();
+>>>>>>> origin/master
     }
 
     // takes in the path to a level and adds the resulting object to
@@ -173,7 +190,12 @@ public class World extends GameObject {
         popMatrix();
         camera.unset();
     }
+<<<<<<< HEAD
 
     }
 
 }
+=======
+    }
+}
+>>>>>>> origin/master
