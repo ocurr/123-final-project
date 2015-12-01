@@ -1,4 +1,5 @@
-//Emily Guerra Lab 9
+//Emily Guerra - modeled dino with articulate animation
+//Oliver Curry - added hit box, key controls, and direction change
 //dinosaur for Final Project - Dino Disaster! 
 
 class Dinosaur extends GameObject {

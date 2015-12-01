@@ -1,6 +1,9 @@
+//Emily Guerra - created cloud and moving snow
+//Snow cloud to follow dinosaur during game play
+
 public class SnowCloud{
   
-  //run every 300 frames to keep constant snow
+  //Need it create new snow every 300-400 frames to keep constant snow
   
 float px[];
 float py[];

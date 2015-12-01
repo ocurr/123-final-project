@@ -1,4 +1,6 @@
+//Emily Guerra
 //Opening cutscene 
+
 public class StartScene{
 
 PImage background;

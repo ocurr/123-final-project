@@ -1,4 +1,5 @@
-
+//Oliver Curry - created technology for hit boxes, collisions, and levels 
+//Emily Guerra - added and positioned platforms
 // Level is an object that handles individual levels
 public class Level extends GameObject {
 
