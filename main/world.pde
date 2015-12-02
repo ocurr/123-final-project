@@ -2,7 +2,7 @@
 // World is an object that handles what a player can
 // see and do in the game e.g. menu, levels, cutscenes, etc...
 public class World extends GameObject {
-    
+
     private ArrayList<Level> levels;
 
     private int currentLevel;
@@ -110,21 +110,38 @@ public class World extends GameObject {
     // update the world
     // this includes character controls, the camera, and the current level
     @Override
-        public void update() {
-            if (mousePressed && !gamestarted){
-                surface.setSize(800,600);
-                gamestarted = true;
-            }
+    public void update() {
+        if (mousePressed && !gamestarted){
+            surface.setSize(800,600);
+            gamestarted = true;
+        }
 
-            if(dino.getX() >= width+4700){
-                gameended = true;
-            }
+        if(dino.getX() >= width+4700){
+            gameended = true;
+        }
 
 
-            if (gameended){
-                surface.setSize(1034, 510);
-                endscene.update();
+        if (gameended){
+            surface.setSize(1034, 510);
+            endscene.update();
+        }
+        else if (!gamestarted){
+            surface.setSize(1034, 510);
+            startscene.update();
+        } else {
+
+            int dx, dy;
+            dx = dy = 0;
+
+            if (keys.get('d') || keys.get('D')) {
+                dx = 5;
+                dino.flipRight();
             }
+            if (keys.get('a') || keys.get('A')) {
+                dx = -5;
+                dino.flipLeft();
+            }
+<<<<<<< HEAD
             else if (!gamestarted){
                 surface.setSize(1034, 510);
                 startscene.update();
@@ -173,6 +190,40 @@ public class World extends GameObject {
 
                 popMatrix();
                 camera.unset();
+=======
+            if ((keys.get('w') || keys.get('W')) && !jumped) {
+                jumped = true;
+                jumpHeight = 25;
+>>>>>>> origin/master
             }
+
+            dino.move(new PVector(dx,dy+(gravity-jumpHeight)));
+
+            jumpHeight -= jumpRate;
+            if (jumpHeight <= 0) {
+                jumped = false;
+                jumpHeight = 0;
             }
+<<<<<<< HEAD
             }
+=======
+
+            if (dino.getX()+dino.getHitBox().getWidth() > width/2) {
+                camera.setPosition(-(dino.getX()+dino.getHitBox().getWidth()-width/2), 0);
+            }
+
+            camera.set();
+            pushMatrix();
+
+            levels.get(currentLevel).update();
+
+            dino.update();
+
+            //snowman.update();
+
+            popMatrix();
+            camera.unset();
+        }
+    }
+}
+>>>>>>> origin/master

@@ -122,14 +122,14 @@ public class Sprite extends GameObject {
     }
 
     @Override
-    public void init() {
-    }
+        public void init() {
+        }
 
     // draw the sprite
     @Override
-    public void update() {
-        pushMatrix();
-        image(img, getX()-getImageOffsetX(), getY()-getImageOffsetY());
-        popMatrix();
-    }
+        public void update() {
+            pushMatrix();
+            image(img, getX()-getImageOffsetX(), getY()-getImageOffsetY());
+            popMatrix();
+        }
 }
