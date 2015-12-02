@@ -10,14 +10,14 @@ class Collider {
     }
 
     /***
-        all collision detection functions follow the standard of
-        hitbox two is colliding with hitbox one
-    ***/
+      all collision detection functions follow the standard of
+      hitbox two is colliding with hitbox one
+     ***/
 
     // full total collision
     public boolean detectCollision(HitBox one, HitBox two) {
         return leftHandCollision(one,two) || rightHandCollision(one,two) ||
-                leftHandCollision(two,one) || rightHandCollision(two,one);
+            leftHandCollision(two,one) || rightHandCollision(two,one);
     }
 
 
@@ -25,124 +25,124 @@ class Collider {
     private boolean leftHandCollision(HitBox one, HitBox two) {
         return
             (impLine(
-                    one.getX(),
-                    one.getY(),
-                    one.getRightX(),
-                    one.getY(),
-                    two.getX(),
-                    two.getY()) > 0 &&
-            impLine(
-                    one.getRightX(),
-                    one.getY(),
-                    one.getRightX(),
-                    one.getBottomY(),
-                    two.getX(),
-                    two.getY()) > 0 &&
-            impLine(
-                    one.getX(),
-                    one.getBottomY(),
-                    one.getRightX(),
-                    one.getBottomY(),
-                    two.getX(),
-                    two.getY()) < 0 &&
-            impLine(
-                    one.getX(),
-                    one.getY(),
-                    one.getX(),
-                    one.getBottomY(),
-                    two.getX(),
-                    two.getY()) < 0) ||
+                     one.getX(),
+                     one.getY(),
+                     one.getRightX(),
+                     one.getY(),
+                     two.getX(),
+                     two.getY()) > 0 &&
+             impLine(
+                 one.getRightX(),
+                 one.getY(),
+                 one.getRightX(),
+                 one.getBottomY(),
+                 two.getX(),
+                 two.getY()) > 0 &&
+             impLine(
+                 one.getX(),
+                 one.getBottomY(),
+                 one.getRightX(),
+                 one.getBottomY(),
+                 two.getX(),
+                 two.getY()) < 0 &&
+             impLine(
+                     one.getX(),
+                     one.getY(),
+                     one.getX(),
+                     one.getBottomY(),
+                     two.getX(),
+                     two.getY()) < 0) ||
 
-            (impLine(
-                    one.getX(),
-                    one.getY(),
-                    one.getRightX(),
-                    one.getY(),
-                    two.getX(),
-                    two.getBottomY()) > 0 &&
-            impLine(
-                    one.getRightX(),
-                    one.getY(),
-                    one.getRightX(),
-                    one.getBottomY(),
-                    two.getX(),
-                    two.getBottomY()) > 0 &&
-            impLine(
-                    one.getX(),
-                    one.getBottomY(),
-                    one.getRightX(),
-                    one.getBottomY(),
-                    two.getX(),
-                    two.getBottomY()) < 0 &&
-            impLine(
-                    one.getX(),
-                    one.getY(),
-                    one.getX(),
-                    one.getBottomY(),
-                    two.getX(),
-                    two.getBottomY()) < 0);
+                         (impLine(
+                                  one.getX(),
+                                  one.getY(),
+                                  one.getRightX(),
+                                  one.getY(),
+                                  two.getX(),
+                                  two.getBottomY()) > 0 &&
+                          impLine(
+                              one.getRightX(),
+                              one.getY(),
+                              one.getRightX(),
+                              one.getBottomY(),
+                              two.getX(),
+                              two.getBottomY()) > 0 &&
+                          impLine(
+                              one.getX(),
+                              one.getBottomY(),
+                              one.getRightX(),
+                              one.getBottomY(),
+                              two.getX(),
+                              two.getBottomY()) < 0 &&
+                          impLine(
+                                  one.getX(),
+                                  one.getY(),
+                                  one.getX(),
+                                  one.getBottomY(),
+                                  two.getX(),
+                                  two.getBottomY()) < 0);
     }
 
     // collide on the right
     private boolean rightHandCollision(HitBox one, HitBox two) {
         return
             (impLine(
-                    one.getX(),
-                    one.getY(),
-                    one.getRightX(),
-                    one.getY(),
-                    two.getRightX(),
-                    two.getY()) > 0 &&
-            impLine(
-                    one.getRightX(),
-                    one.getY(),
-                    one.getRightX(),
-                    one.getBottomY(),
-                    two.getRightX(),
-                    two.getY()) > 0 &&
-            impLine(
-                    one.getX(),
-                    one.getBottomY(),
-                    one.getRightX(),
-                    one.getBottomY(),
-                    two.getRightX(),
-                    two.getY()) < 0 &&
-            impLine(
-                    one.getX(),
-                    one.getY(),
-                    one.getX(),
-                    one.getBottomY(),
-                    two.getRightX(),
-                    two.getY()) < 0) ||
+                     one.getX(),
+                     one.getY(),
+                     one.getRightX(),
+                     one.getY(),
+                     two.getRightX(),
+                     two.getY()) > 0 &&
+             impLine(
+                 one.getRightX(),
+                 one.getY(),
+                 one.getRightX(),
+                 one.getBottomY(),
+                 two.getRightX(),
+                 two.getY()) > 0 &&
+             impLine(
+                 one.getX(),
+                 one.getBottomY(),
+                 one.getRightX(),
+                 one.getBottomY(),
+                 two.getRightX(),
+                 two.getY()) < 0 &&
+             impLine(
+                     one.getX(),
+                     one.getY(),
+                     one.getX(),
+                     one.getBottomY(),
+                     two.getRightX(),
+                     two.getY()) < 0) ||
 
-            (impLine(
-                    one.getX(),
-                    one.getY(),
-                    one.getRightX(),
-                    one.getY(),
-                    two.getRightX(),
-                    two.getBottomY()) > 0 &&
-            impLine(
-                    one.getRightX(),
-                    one.getY(),
-                    one.getRightX(),
-                    one.getBottomY(),
-                    two.getRightX(),
-                    two.getBottomY()) > 0 &&
-            impLine(
-                    one.getX(),
-                    one.getBottomY(),
-                    one.getRightX(),
-                    one.getBottomY(),
-                    two.getRightX(),
-                    two.getBottomY()) < 0 &&
-            impLine(
-                    one.getX(),
-                    one.getY(),
-                    one.getX(),
-                    one.getBottomY(),
-                    two.getRightX(),
-                    two.getBottomY()) < 0);
+                         (impLine(
+                                  one.getX(),
+                                  one.getY(),
+                                  one.getRightX(),
+                                  one.getY(),
+                                  two.getRightX(),
+                                  two.getBottomY()) > 0 &&
+                          impLine(
+                              one.getRightX(),
+                              one.getY(),
+                              one.getRightX(),
+                              one.getBottomY(),
+                              two.getRightX(),
+                              two.getBottomY()) > 0 &&
+                          impLine(
+                              one.getX(),
+                              one.getBottomY(),
+                              one.getRightX(),
+                              one.getBottomY(),
+                              two.getRightX(),
+                              two.getBottomY()) < 0 &&
+                          impLine(
+                                  one.getX(),
+                                  one.getY(),
+                                  one.getX(),
+                                  one.getBottomY(),
+                                  two.getRightX(),
+                                  two.getBottomY()) < 0);
     }
 
     // collide from the left

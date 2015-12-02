@@ -1,4 +1,4 @@
- 
+
 World world;
 
 //these are the paths to images and other
@@ -14,7 +14,7 @@ void setup() {
     //to test at
     size(800, 600);
     surface.setResizable(true);
-    
+
     // create the game world
     world = new World();
 
