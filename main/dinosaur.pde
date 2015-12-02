@@ -19,7 +19,7 @@ boolean THIGHmove = true;
 boolean THIGHmove2 = true;
 boolean LEGmove = true;
 boolean LEGmove2 = true;
-boolean dinoEnter = true;
+boolean dinoAnimate = false;
 
 float px[];
 float py[];
@@ -108,9 +108,16 @@ public void move(PVector p) {
     setPosition((int)(hb.getPosition().x+p.x), (int)(hb.getPosition().y+p.y));
 }
 
+
+
 void update() {
+    
     drawDino(hb.getX(),hb.getY());
+    
+    if (dinoAnimate == true){
     animate();
+    }
+    
     //hb.drawHitRect(0,0);
 }
 
@@ -124,7 +131,7 @@ void drawDino(float dx, float dinoy) {
   translate(-10,-15);
   scale(.14*scaleMult,.14);
   translate(flipOffsetX,flipOffsetY);
-  //scales and translates whole dino (dx can move it across screen)
+  //scales and translates whole dino 
 
   pushMatrix(); 
   translate(THIGHx, THIGHy-150);
@@ -205,7 +212,6 @@ void drawDino(float dx, float dinoy) {
   //neck
 
   pushMatrix();
-  //fill(245, 115, 89);
   if (rotTHIGH>0) {
    translate(942, 137);
    rotate(-rotTHIGH/3+.1);
@@ -217,7 +223,7 @@ void drawDino(float dx, float dinoy) {
    rotate(rotTHIGH/3+.1);
    translate(-942, -137);
   }
-  //if active makes dino move head up at certain spot along screen
+  // makes dino move head bob up and down as he walks
 
   fill(255, 249, 219);
   ellipse(1160, 150, 20, 30);
@@ -334,6 +340,7 @@ void animate() {
 
     THIGHmove = true;
   }
+  //controls when thigh moves based on rotation angle
 
 
   if (THIGHmove == true) {
@@ -341,7 +348,7 @@ void animate() {
   } else {
     rotTHIGH += .01;
   }
-
+//controls angle thigh rotates by
 
 
   if ((rotTHIGH > 0 && THIGHmove == true) || (rotTHIGH<0 && THIGHmove == false) ) {
@@ -352,7 +359,7 @@ void animate() {
   if ((rotTHIGH>0 && THIGHmove == false)|| (rotTHIGH<0 && THIGHmove == true)) {
     dy -= .2;
   }
-
+//controls when and how much the dino body bobs up and down as it walks 
 
   if (rotLEG < .1) {
     LEGmove = true;
@@ -360,6 +367,7 @@ void animate() {
   if (rotLEG > .5) {
     LEGmove = false;
   }
+  //controls when thigh moves based on rotation angle
 
   if (THIGHmove == true) {
     rotLEG-= .006; 
@@ -374,6 +382,7 @@ void animate() {
   } else {
     rotLEG2 += .006;
   }
+   //controls how much the arms/knee/ankle joints bend based on thigh rotation
 }
 
 }

@@ -134,16 +134,20 @@ public class World extends GameObject {
                 dx = dy = 0;
 
                 if (keys.get('d') || keys.get('D')) {
-                    dx = 5;
+                    dx = 4;
                     dino.flipRight();
+                    dino.dinoAnimate = true;
                 }
-                if (keys.get('a') || keys.get('A')) {
-                    dx = -5;
+                else if (keys.get('a') || keys.get('A')) {
+                    dx = -4;
                     dino.flipLeft();
+                    dino.dinoAnimate = true;
+                }else{
+                    dino.dinoAnimate = false;
                 }
                 if ((keys.get('w') || keys.get('W')) && !jumped) {
                     jumped = true;
-                    jumpHeight = 25;
+                    jumpHeight = 20;
                 }
 
                 dino.move(new PVector(dx,dy+(gravity-jumpHeight)));

@@ -44,23 +44,25 @@ public class Level extends GameObject {
     eggs = new Sprite(spritePath+"eggs.png");
     eggs.setPosition(width+4900, height-70);
 
-    for (int i=0; i<13; i++) {
+    for (int i=0; i<15; i++) {
       platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
     }
 
     platforms.get(0).setPosition(0, height-60);
     platforms.get(1).setPosition(width-235, height - 60);
     platforms.get(2).setPosition(width+15, height-150);
-    platforms.get(3).setPosition(width+400, height-235);
+    platforms.get(3).setPosition(width+300, height-235);
     platforms.get(4).setPosition(width+500, height - 60);
     platforms.get(5).setPosition(width+1100, height - 60);
     platforms.get(6).setPosition(width+1600, height - 60);
     platforms.get(7).setPosition(width+1800, height -240);
     platforms.get(8).setPosition(width+2200, height- 240);
-    platforms.get(9).setPosition(width+2800, height-150);
-    platforms.get(10).setPosition(width+3200, height-150);
-    platforms.get(11).setPosition(width+3600, height-60);
-    platforms.get(12).setPosition(width+4500, height-60);
+    platforms.get(9).setPosition(width+2600, height-150);
+    platforms.get(10).setPosition(width+2800, height-150);
+    platforms.get(11).setPosition(width+3000, height-150);
+    platforms.get(12).setPosition(width+3200, height-60);
+    platforms.get(13).setPosition(width+4000, height-60);
+    platforms.get(14).setPosition(width+4500, height-60);
   }
 
   // get the width of the level
@@ -101,7 +103,7 @@ public class Level extends GameObject {
     }
 
 
-    for (int p=0; p<13; p++) {
+    for (int p=0; p<15; p++) {
       Sprite pl = platforms.get(p);
 
       if (pl.didCollideTop(character.getHitBox())) {
