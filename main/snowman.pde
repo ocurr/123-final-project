@@ -19,7 +19,7 @@ public class Snowman extends GameObject {
         //Sloc = new PVector(width*.5, height/8);
         dir = new PVector(-0.5, 0);
         time = 0.3;
-        HB = new HitBox(0, 0, 80, 95);
+        HB = new HitBox(0, 0, 30, 45);
         HB.setPosition(400, 400);
     }
 
@@ -57,12 +57,12 @@ public class Snowman extends GameObject {
     //code to draw the snowman with animation parameters armR and arm2R
     void drawSnowman(float dx, float dy) {
         pushMatrix();
-        translate(dx, dy);
+        translate(dx+15, dy+22);
         noStroke();
         smooth();
         pushMatrix();
         translate(-60, -80);
-        scl = 0.5;
+        scl = 0.3;
         scale(scl);
         fill(255);
         //body 
@@ -165,7 +165,6 @@ public class Snowman extends GameObject {
     void update() {
         if (!kill) {
 
-            //background(200);
             drawSnowman(HB.getPosition().x, HB.getPosition().y);
             //HB.drawHitRect(0, 0);
             animate();

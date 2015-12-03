@@ -114,7 +114,7 @@ class Dinosaur extends GameObject {
         if (dinoAnimate) {
             animate();
         }
-        hb.drawHitRect(0,0);
+        //hb.drawHitRect(0,0);
     }
 
     void drawDino(float dx, float dinoy) {
