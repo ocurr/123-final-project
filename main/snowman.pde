@@ -175,8 +175,4 @@ public class Snowman extends GameObject {
           drawSnowman(HB.getPosition().x+=3, HB.getPosition().y+=3);
     }
     }
-    //void mousePressed(){
-    //Sloc.x = width *.5;
-    //animate =! animate;
-
 }

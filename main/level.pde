@@ -11,6 +11,9 @@ public class Level extends GameObject {
     private Sprite eggs;
     private Dinosaur character;
     private Snowman snowman;
+    private Snowman snowman2;
+    private Snowman snowman3;
+    private Lives life;
     private SnowCloud snowcloud;
 
     private HashMap<Character,Boolean> keys;
@@ -46,6 +49,11 @@ public class Level extends GameObject {
         camera = null;
         snowman = new Snowman(); 
         snowman.setPosition(900, 360);
+        snowman2 = new Snowman();
+        snowman2.setPosition(1600, 360);
+        snowman3 = new Snowman();
+        snowman3.setPosition(2800, 360);
+        life = new Lives();
         collider = new Collider();
 
         platforms = new ArrayList<Sprite>();
@@ -71,8 +79,7 @@ public class Level extends GameObject {
         
         snowcloud = new SnowCloud();
         
-      
-
+        
         for (int i=0; i<15; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
         }
@@ -211,12 +218,42 @@ public class Level extends GameObject {
                 if (pl.didCollideRight(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionX(pl.getX()+pl.getWidth());
                 }
+                if (pl.didCollideTop(snowman2.getHitBox()) && !snowman2.isDead()) {
+                    snowman2.setPositionY(pl.getY() - snowman2.getHeight());
+                }
+                if (pl.didCollideBottom(snowman2.getHitBox()) && !snowman2.isDead()) {
+                    snowman2.setPositionY(pl.getY() + pl.getHeight());
+                }
+                if (pl.didCollideLeft(snowman2.getHitBox()) && !snowman2.isDead()) {
+                    snowman2.setPositionX(pl.getX()-snowman2.getWidth());
+                }
+                if (pl.didCollideRight(snowman2.getHitBox()) && !snowman2.isDead()) {
+                    snowman2.setPositionX(pl.getX()+pl.getWidth());
+                }
+                if (pl.didCollideTop(snowman3.getHitBox()) && !snowman3.isDead()) {
+                    snowman3.setPositionY(pl.getY() - snowman3.getHeight());
+                }
+                if (pl.didCollideBottom(snowman3.getHitBox()) && !snowman3.isDead()) {
+                    snowman3.setPositionY(pl.getY() + pl.getHeight());
+                }
+                if (pl.didCollideLeft(snowman3.getHitBox()) && !snowman3.isDead()) {
+                    snowman3.setPositionX(pl.getX()-snowman3.getWidth());
+                }
+                if (pl.didCollideRight(snowman3.getHitBox()) && !snowman3.isDead()) {
+                    snowman3.setPositionX(pl.getX()+pl.getWidth());
+                }
 
                 pl.update();
             }
 
             if (collider.detectCollisionTop(snowman.getHitBox(), character.getHitBox())) {
                 snowman.setkill();
+            }
+            if (collider.detectCollisionTop(snowman2.getHitBox(), character.getHitBox())) {
+                snowman2.setkill();
+            }
+            if (collider.detectCollisionTop(snowman3.getHitBox(), character.getHitBox())) {
+                snowman3.setkill();
             }
             
             if (collider.detectCollision(snowcloud.getHitBox(), character.getHitBox())){
@@ -227,9 +264,14 @@ public class Level extends GameObject {
 
             eggs.update();
             snowman.update();
-            snowman.move(new PVector(0, 5));
+            snowman.move(new PVector(.1, 5));
+            snowman2.update();
+            snowman2.move(new PVector(.1, 5));
+            snowman3.update();
+            snowman3.move(new PVector(.1, 5));
             snowcloud.move(2);
             snowcloud.update();
+            life.update();
 
 
             popMatrix();
