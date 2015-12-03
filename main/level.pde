@@ -196,7 +196,7 @@ public class Level extends GameObject {
                 pl.update();
             }
 
-            if (collider.detectCollisionBottom(character.getHitBox(), snowman.getHitBox())) {
+            if (collider.detectCollisionTop(snowman.getHitBox(), character.getHitBox())) {
                 snowman.setkill();
             }
 
