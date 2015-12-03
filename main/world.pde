@@ -111,12 +111,17 @@ public class World extends GameObject {
     // this includes character controls, the camera, and the current level
     @Override
         public void update() {
-            if (mousePressed && !gamestarted){
+            if (mousePressed && gameended) {
+                gamestarted = false;
+                gameended = false;
+            } else if (mousePressed && !gamestarted){
                 surface.setSize(800,600);
                 gamestarted = true;
+                levels.get(0).init(camera);
+                levels.get(0).grabCharacter(dino);
             }
 
-            if(dino.getX() >= width+4700){
+            if(dino.getX() >= width+4700 && gamestarted){
                 gameended = true;
             }
 
@@ -124,6 +129,7 @@ public class World extends GameObject {
             if (gameended){
                 surface.setSize(1034, 510);
                 endscene.update();
+                gamestarted = false;
             } else if (!gamestarted){
                 surface.setSize(1034, 510);
                 startscene.update();

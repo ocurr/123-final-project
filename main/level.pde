@@ -85,6 +85,7 @@ public class Level extends GameObject {
     // takes in the camera and sets it's bounds to the bouds of the level
     public void init(Camera cam) {
         cam.setBounds(0, 0, getWidth(), getHeight());
+        cam.setPosition(0,0);
     }
 
     // update the level
