@@ -226,8 +226,6 @@ public class Level extends GameObject {
             }
             for (int s=0; s<3; s++) {
                 Snowman snowman = enemys.get(s);
-                println("****** ",snowman.getHitBox().getY());
-
 
                 for (int p=0; p<15; p++) {
                     Sprite pl = platforms.get(p);
