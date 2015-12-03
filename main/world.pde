@@ -137,6 +137,12 @@ public class World extends GameObject {
 
                 int dx, dy;
                 dx = dy = 0;
+                
+                if (dino.getY() > height+150 ){
+                  levels.get(0).init(camera);
+                levels.get(0).grabCharacter(dino);
+                  
+                }
 
                 if (keys.get('d') || keys.get('D')) {
                     dx = 4;
