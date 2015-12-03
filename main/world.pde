@@ -16,43 +16,15 @@ public class World extends GameObject {
   private boolean gamestarted = false;
   private boolean gameended = false;
 
-<<<<<<< HEAD
-    public World() {
-        levels = new ArrayList<Level>();
-        currentLevel = 0;
-=======
   private HashMap<Character, Boolean> keys;
-
-  private int gravity;
-  private int jumpHeight;
-  private int jumpRate;
-  private boolean jumped;
 
   public World() {
     levels = new ArrayList<Level>();
     currentLevel = 0;
->>>>>>> 773d8b36e5a7342a39cd44592f58982f65330de6
 
     camera = new Camera();
 
-<<<<<<< HEAD
-        dino = new Dinosaur();
-=======
-    gravity = 10;
-    jumpHeight = 0;
-    jumpRate = 1;
-    jumped = false;
-
-    keys = new HashMap<Character, Boolean>();
-    keys.put('d', false);
-    keys.put('D', false);
-    keys.put('a', false);
-    keys.put('A', false);
-    keys.put('w', false);
-    keys.put('W', false);
-
     dino = new Dinosaur();
->>>>>>> 773d8b36e5a7342a39cd44592f58982f65330de6
 
     endscene = new EndScene();
     startscene = new StartScene();

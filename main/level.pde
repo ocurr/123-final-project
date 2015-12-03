@@ -136,6 +136,10 @@ public class Level extends GameObject {
             pushMatrix();
             background.update();
 
+            if (character.getY() > height+150) {
+                reset();
+            }
+
             int dx, dy;
             dx = dy = 0;
 
