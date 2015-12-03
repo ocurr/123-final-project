@@ -75,17 +75,12 @@ public class Level extends GameObject {
         return background.getHeight();
     }
 
-    // this allows the level to access the character object
-    // and sets it's initial position in the level
-    public void grabCharacter(Dinosaur c) {
-        character = c;
-        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
-    }
-
     // takes in the camera and sets it's bounds to the bouds of the level
-    public void init(Camera cam) {
+    public void init(Camera cam, Dinosaur c) {
         cam.setBounds(0, 0, getWidth(), getHeight());
         cam.setPosition(0,0);
+        character = c;
+        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
     }
 
     // update the level

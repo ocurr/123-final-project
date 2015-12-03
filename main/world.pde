@@ -103,8 +103,7 @@ public class World extends GameObject {
     // initialize the first level
     @Override
     public void init() {
-        levels.get(0).init(camera);
-        levels.get(0).grabCharacter(dino);
+        levels.get(0).init(camera, dino);
     }
 
     // update the world
@@ -117,8 +116,7 @@ public class World extends GameObject {
             } else if (mousePressed && !gamestarted){
                 surface.setSize(800,600);
                 gamestarted = true;
-                levels.get(0).init(camera);
-                levels.get(0).grabCharacter(dino);
+                levels.get(0).init(camera, dino);
             }
 
             if(dino.getX() >= width+4700 && gamestarted){
