@@ -28,15 +28,6 @@ public class World extends GameObject {
 
     endscene = new EndScene();
     startscene = new StartScene();
-
-    endscene = new EndScene();
-    startscene = new StartScene();
-
-    endscene = new EndScene();
-    startscene = new StartScene();
-
-    endscene = new EndScene();
-    startscene = new StartScene();
   }
 
   // takes in the path to a level and adds the resulting object to
@@ -93,6 +84,8 @@ public class World extends GameObject {
             if (mousePressed && gameended) {
                 gamestarted = false;
                 gameended = false;
+                startscene = new StartScene();
+                endscene = new EndScene();
             } else if (mousePressed && !gamestarted){
                 surface.setSize(800,600);
                 gamestarted = true;
