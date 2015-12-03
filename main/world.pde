@@ -3,73 +3,102 @@
 // see and do in the game e.g. menu, levels, cutscenes, etc...
 public class World extends GameObject {
 
-    private ArrayList<Level> levels;
+  private ArrayList<Level> levels;
 
-    private int currentLevel;
+  private int currentLevel;
 
-    private Camera camera;
+  private Camera camera;
 
-    private Dinosaur dino;
+  private Dinosaur dino;
 
-    private EndScene endscene;
-    private StartScene startscene;
-    private boolean gamestarted = false;
-    private boolean gameended = false;
+  private EndScene endscene;
+  private StartScene startscene;
+  private boolean gamestarted = false;
+  private boolean gameended = false;
 
+<<<<<<< HEAD
     public World() {
         levels = new ArrayList<Level>();
         currentLevel = 0;
+=======
+  private HashMap<Character, Boolean> keys;
 
-        camera = new Camera();
+  private int gravity;
+  private int jumpHeight;
+  private int jumpRate;
+  private boolean jumped;
 
+  public World() {
+    levels = new ArrayList<Level>();
+    currentLevel = 0;
+>>>>>>> 773d8b36e5a7342a39cd44592f58982f65330de6
+
+    camera = new Camera();
+
+<<<<<<< HEAD
         dino = new Dinosaur();
+=======
+    gravity = 10;
+    jumpHeight = 0;
+    jumpRate = 1;
+    jumped = false;
 
-        endscene = new EndScene();
-        startscene = new StartScene();
+    keys = new HashMap<Character, Boolean>();
+    keys.put('d', false);
+    keys.put('D', false);
+    keys.put('a', false);
+    keys.put('A', false);
+    keys.put('w', false);
+    keys.put('W', false);
 
-        endscene = new EndScene();
-        startscene = new StartScene();
+    dino = new Dinosaur();
+>>>>>>> 773d8b36e5a7342a39cd44592f58982f65330de6
 
-        endscene = new EndScene();
-        startscene = new StartScene();
+    endscene = new EndScene();
+    startscene = new StartScene();
 
-        endscene = new EndScene();
-        startscene = new StartScene();
+    endscene = new EndScene();
+    startscene = new StartScene();
 
+    endscene = new EndScene();
+    startscene = new StartScene();
+
+    endscene = new EndScene();
+    startscene = new StartScene();
+  }
+
+  // takes in the path to a level and adds the resulting object to
+  // the arraylist
+  public void addLevel(String levelPath) {
+    levels.add(new Level(levelPath));
+  }
+
+  // takes in the requested level and checks whether it is
+  // a valid level
+  // TODO: there is a better way of doing this
+  //       involving the actual level arraylist
+  public void setCurrentLevel(int level) {
+    // look up the '?' operator if this confuses you
+    currentLevel = level-1 < 0 ? 0 : level-1;
+  }
+
+  // increases the current level by one
+  public void incrementCurrentLevel() {
+    if (currentLevel < levels.size()) {
+      currentLevel++;
+    } else {
+      currentLevel = levels.size()-1;
     }
+  }
 
-    // takes in the path to a level and adds the resulting object to
-    // the arraylist
-    public void addLevel(String levelPath) {
-        levels.add(new Level(levelPath));
+  // decreases the current level by one
+  public void decrementLevel() {
+    if (currentLevel > 0) {
+      currentLevel--;
+    } else {
+      currentLevel = 0;
     }
-
-    // takes in the requested level and checks whether it is
-    // a valid level
-    // TODO: there is a better way of doing this
-    //       involving the actual level arraylist
-    public void setCurrentLevel(int level) {
-        // look up the '?' operator if this confuses you
-        currentLevel = level-1 < 0 ? 0 : level-1;
-    }
-
-    // increases the current level by one
-    public void incrementCurrentLevel() {
-        if (currentLevel < levels.size()) {
-            currentLevel++;
-        } else {
-            currentLevel = levels.size()-1;
-        }
-    }
-
-    // decreases the current level by one
-    public void decrementLevel() {
-        if (currentLevel > 0) {
-            currentLevel--;
-        } else {
-            currentLevel = 0;
-        }
-    }
+  }
 
     public void updateLevelKeysPressed(char key) {
         levels.get(currentLevel).updateKeyPressed(key);

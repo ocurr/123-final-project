@@ -129,7 +129,7 @@ private void update() {
   popMatrix();
   pushMatrix();
   drawMeteor();
-  if (rx <1000) {
+  if (rx <=1000) {
     animateROCK();
   }
 
@@ -393,12 +393,6 @@ private void drawSnow() {
   }
 }
 
-
-
-
-
-
-
 private void drawMeteor() {
 
   pushMatrix();
@@ -543,8 +537,8 @@ private void drawBOOM() {
 private void animateROCK() {
   rotROCK+= .1;
   if (dx > 550) {
-    rx+=4;
-    ry+=2;
+    rx+=5;
+    ry+=3;
   }
 }
 

@@ -6,10 +6,12 @@ public class Level extends GameObject {
     private Sprite background;
     private Sprite backgroundLeft;
     private Sprite backgroundRight;
+    private Camera camera;
 
     private Sprite eggs;
     private Dinosaur character;
     private Snowman snowman;
+    private SnowCloud snowcloud;
 
     private HashMap<Character,Boolean> keys;
 
@@ -41,6 +43,7 @@ public class Level extends GameObject {
                 background.getHeight());
 
         character = null;
+        camera = null;
         snowman = new Snowman(); 
         snowman.setPosition(900, 360);
         collider = new Collider();
@@ -65,6 +68,10 @@ public class Level extends GameObject {
 
         eggs = new Sprite(spritePath+"eggs.png");
         eggs.setPosition(width+4900, height-70);
+        
+        snowcloud = new SnowCloud();
+        
+      
 
         for (int i=0; i<15; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
@@ -96,6 +103,13 @@ public class Level extends GameObject {
     public int getHeight() {
         return background.getHeight();
     }
+    
+    private void reset(){
+       character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
+        camera.setBounds(0, 0, getWidth(), getHeight());
+        camera.setPosition(0,0);
+        snowcloud.setPositionX(-500);
+    }
 
     // takes in the camera and sets it's bounds to the bouds of the level
     public void init(Camera cam, Dinosaur c) {
@@ -103,15 +117,16 @@ public class Level extends GameObject {
         cam.setPosition(0,0);
         character = c;
         character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
-    }
-
-
-    public void updateKeyPressed(char key) {
-        keys.put(key,true);
+        snowcloud.setPositionX(-500);
+        camera = cam;
     }
 
     public void updateKeyReleased(char key) {
         keys.put(key,false);
+    }
+
+    public void updateKeyPressed(char key) {
+        keys.put(key,true);
     }
     // update the level
     // draws the background and anything else in the level
@@ -180,16 +195,16 @@ public class Level extends GameObject {
                 if (pl.didCollideRight(character.getHitBox())) {
                     character.setPositionX(pl.getX()+pl.getWidth());
                 }
-                if (pl.didCollideTop(snowman.getHitBox())) {
+                if (pl.didCollideTop(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionY(pl.getY() - snowman.getHeight());
                 }
-                if (pl.didCollideBottom(snowman.getHitBox())) {
+                if (pl.didCollideBottom(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionY(pl.getY() + pl.getHeight());
                 }
-                if (pl.didCollideLeft(snowman.getHitBox())) {
+                if (pl.didCollideLeft(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionX(pl.getX()-snowman.getWidth());
                 }
-                if (pl.didCollideRight(snowman.getHitBox())) {
+                if (pl.didCollideRight(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionX(pl.getX()+pl.getWidth());
                 }
 
@@ -199,12 +214,18 @@ public class Level extends GameObject {
             if (collider.detectCollisionTop(snowman.getHitBox(), character.getHitBox())) {
                 snowman.setkill();
             }
+            
+            if (collider.detectCollision(snowcloud.getHitBox(), character.getHitBox())){
+                reset();
+            }
 
             character.update();
 
             eggs.update();
             snowman.update();
             snowman.move(new PVector(0, 5));
+            snowcloud.move(2);
+            snowcloud.update();
 
 
             popMatrix();
