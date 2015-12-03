@@ -61,7 +61,7 @@ class Dinosaur extends GameObject {
 
     public void flipLeft() {
         scaleMult = -1; 
-        flipOffsetX = -1300;
+        flipOffsetX = -1500;
         flipOffsetY = 0;
     }
 
