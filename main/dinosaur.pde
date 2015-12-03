@@ -55,13 +55,14 @@ class Dinosaur extends GameObject {
         flipOffsetX = 0;
         flipOffsetY = 0;
 
-        hb = new HitBox(0,0,(int)(470*0.34),(int)(325*0.34));
+        //(int)(470*0.34) (int)(325*0.34))
+        hb = new HitBox(0,0,40,(int)(325*0.34));
         hb.setPosition(0,0);
     }
 
     public void flipLeft() {
         scaleMult = -1; 
-        flipOffsetX = -1500;
+        flipOffsetX = -1600;
         flipOffsetY = 0;
     }
 
@@ -113,13 +114,13 @@ class Dinosaur extends GameObject {
         if (dinoAnimate) {
             animate();
         }
-        //hb.drawHitRect(0,0);
+        hb.drawHitRect(0,0);
     }
 
     void drawDino(float dx, float dinoy) {
 
         pushMatrix();
-        translate(dx, dinoy);
+        translate(dx-(int)((470*0.34)/2), dinoy);
 
         pushMatrix();
         //translate(-30+flipOffsetX, -130+flipOffsetY);

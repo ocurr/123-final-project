@@ -29,7 +29,7 @@ public class World extends GameObject {
 
         camera = new Camera();
 
-        gravity = 5;
+        gravity = 10;
         jumpHeight = 0;
         jumpRate = 1;
         jumped = false;
