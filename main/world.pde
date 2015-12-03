@@ -16,31 +16,11 @@ public class World extends GameObject {
     private boolean gamestarted = false;
     private boolean gameended = false;
 
-    private HashMap<Character,Boolean> keys;
-
-    private int gravity;
-    private int jumpHeight;
-    private int jumpRate;
-    private boolean jumped;
-
     public World() {
         levels = new ArrayList<Level>();
         currentLevel = 0;
 
         camera = new Camera();
-
-        gravity = 10;
-        jumpHeight = 0;
-        jumpRate = 1;
-        jumped = false;
-
-        keys = new HashMap<Character,Boolean>();
-        keys.put('d',false);
-        keys.put('D',false);
-        keys.put('a',false);
-        keys.put('A',false);
-        keys.put('w',false);
-        keys.put('W',false);
 
         dino = new Dinosaur();
 
@@ -91,13 +71,12 @@ public class World extends GameObject {
         }
     }
 
-    // updates each known key's value
-    public void updateKeyPress(char key) {
-        keys.put(key,true);
+    public void updateLevelKeysPressed(char key) {
+        levels.get(currentLevel).updateKeyPressed(key);
     }
 
-    public void updateKeyRelease(char key) {
-        keys.put(key,false);
+    public void updateLevelKeysReleased(char key) {
+        levels.get(currentLevel).updateKeyReleased(key);
     }
 
     // initialize the first level
@@ -133,33 +112,6 @@ public class World extends GameObject {
                 startscene.update();
             } else {
 
-                int dx, dy;
-                dx = dy = 0;
-
-                if (keys.get('d') || keys.get('D')) {
-                    dx = 4;
-                    dino.flipRight();
-                    dino.dinoAnimate = true;
-                }
-                else if (keys.get('a') || keys.get('A')) {
-                    dx = -4;
-                    dino.flipLeft();
-                    dino.dinoAnimate = true;
-                }else{
-                    dino.dinoAnimate = false;
-                }
-                if ((keys.get('w') || keys.get('W')) && !jumped) {
-                    jumped = true;
-                    jumpHeight = 20;
-                }
-
-                dino.move(new PVector(dx,dy+(gravity-jumpHeight)));
-
-                jumpHeight -= jumpRate;
-                if (jumpHeight <= 0) {
-                    jumped = false;
-                    jumpHeight = 0;
-                }
 
                 if (dino.getX()+dino.getHitBox().getWidth() > width/2) {
                     camera.setPosition(-(dino.getX()+dino.getHitBox().getWidth()-width/2), 0);

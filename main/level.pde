@@ -11,11 +11,19 @@ public class Level extends GameObject {
     private Dinosaur character;
     private Snowman snowman;
 
+    private HashMap<Character,Boolean> keys;
+
     private HitBox mouse;
 
     private Collider collider;
 
     ArrayList<Sprite> platforms;
+
+    private int gravity;
+    private int jumpHeight;
+    private int jumpRate;
+    private boolean jumped;
+    private int numJumps;
 
     // takes in a path to the background image
     public Level(String levelPath) {
@@ -38,6 +46,20 @@ public class Level extends GameObject {
         collider = new Collider();
 
         platforms = new ArrayList<Sprite>();
+
+        keys = new HashMap<Character,Boolean>();
+        keys.put('d',false);
+        keys.put('D',false);
+        keys.put('a',false);
+        keys.put('A',false);
+        keys.put('w',false);
+        keys.put('W',false);
+
+        gravity = 10;
+        jumpHeight = 0;
+        jumpRate = 1;
+        jumped = false;
+        numJumps = 0;
 
         mouse = new HitBox(0, 0, 1, 1);
 
@@ -83,6 +105,14 @@ public class Level extends GameObject {
         character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
     }
 
+
+    public void updateKeyPressed(char key) {
+        keys.put(key,true);
+    }
+
+    public void updateKeyReleased(char key) {
+        keys.put(key,false);
+    }
     // update the level
     // draws the background and anything else in the level
     // and checks for collisions between the character and anything in the level
@@ -91,6 +121,30 @@ public class Level extends GameObject {
             pushMatrix();
             background.update();
 
+            int dx, dy;
+            dx = dy = 0;
+
+            if (keys.get('d') || keys.get('D')) {
+                dx = 4;
+                character.flipRight();
+                character.dinoAnimate = true;
+            }
+            else if (keys.get('a') || keys.get('A')) {
+                dx = -4;
+                character.flipLeft();
+                character.dinoAnimate = true;
+            }else{
+                character.dinoAnimate = false;
+            }
+            if ((keys.get('w') || keys.get('W')) && !jumped && numJumps < 2) {
+                jumped = true;
+                jumpHeight = 25;
+                numJumps++;
+            }
+
+            character.move(new PVector(dx,dy+(gravity-jumpHeight)));
+
+
             if (backgroundLeft.didCollideRight(character.getHitBox())) {
                 character.setPositionX(background.getX());
             } else if (backgroundRight.didCollideLeft(character.getHitBox())) {
@@ -98,15 +152,27 @@ public class Level extends GameObject {
                         (background.getX()+background.getWidth())-character.getWidth());
             }
 
+            jumpHeight -= jumpRate;
+            if (jumpHeight <= 0) {
+                jumped = false;
+                jumpHeight = 0;
+            }
 
             for (int p=0; p<15; p++) {
                 Sprite pl = platforms.get(p);
 
+
                 if (pl.didCollideTop(character.getHitBox())) {
                     character.setPositionY(pl.getY()-character.getHeight());
+                    jumped = false;
+                    jumpHeight = 0;
+                    numJumps = 0;
                 }
                 if (pl.didCollideBottom(character.getHitBox())) {
                     character.setPositionY(pl.getY()+pl.getHeight());
+                    jumped = false;
+                    jumpHeight = 0;
+                    numJumps = 0;
                 }
                 if (pl.didCollideLeft(character.getHitBox())) {
                     character.setPositionX(pl.getX()-character.getWidth());
@@ -133,6 +199,8 @@ public class Level extends GameObject {
             if (collider.detectCollisionBottom(character.getHitBox(), snowman.getHitBox())) {
                 snowman.setkill();
             }
+
+            character.update();
 
             eggs.update();
             snowman.update();

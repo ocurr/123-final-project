@@ -14,11 +14,14 @@ public class HitBox extends GameObject {
     private PVector position;
     private PVector lastPosition;
 
+    private boolean collided;
+
     // create a new empty hitbox
     HitBox() {
         b = new box();
         position = new PVector(0,0);
         lastPosition = new PVector(0,0);
+        collided = false;
     }
 
     // create a new HitBox with the indicated dimensions
@@ -30,6 +33,7 @@ public class HitBox extends GameObject {
         b.height = endY - b.y;
         position = new PVector(0,0);
         lastPosition = new PVector(0,0);
+        collided = false;
 
     }
 
@@ -60,6 +64,7 @@ public class HitBox extends GameObject {
         b.width = b.width-b.x;
         position = new PVector(0,0);
         lastPosition = new PVector(0,0);
+        collided = false;
     }
 
     // set the offset in x for an image
@@ -173,5 +178,13 @@ public class HitBox extends GameObject {
         pushMatrix();
         rect(position.x+offsetX,position.y+offsetY,getWidth(),getHeight());
         popMatrix();
+    }
+
+    public void setCollided(boolean coll) {
+        collided = coll;
+    }
+
+    public boolean isCollided() {
+        return collided;
     }
 }

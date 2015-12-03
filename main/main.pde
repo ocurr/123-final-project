@@ -31,13 +31,12 @@ void setup() {
 void mousePressed() {
 }
 
-// While these two are un-neccessary they gives a better flow of control
 void keyPressed() {
-    world.updateKeyPress(key);
+    world.updateLevelKeysPressed(key);
 }
 
 void keyReleased() {
-    world.updateKeyRelease(key);
+    world.updateLevelKeysReleased(key);
 }
 
 // update the world and background
