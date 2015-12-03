@@ -161,16 +161,20 @@ public class Snowman extends GameObject {
       dir = new PVector(-0.5, 0);
       time = 0.3;
       }*/
-
+      
+  public boolean isDead(){
+    return kill;
+  }
+  
     void update() {
         if (!kill) {
-
             drawSnowman(HB.getPosition().x, HB.getPosition().y);
             //HB.drawHitRect(0, 0);
             animate();
-        }
+        } else {
+          drawSnowman(HB.getPosition().x+=3, HB.getPosition().y+=3);
     }
-
+    }
     //void mousePressed(){
     //Sloc.x = width *.5;
     //animate =! animate;

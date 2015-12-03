@@ -135,16 +135,16 @@ public class Level extends GameObject {
                 if (pl.didCollideRight(character.getHitBox())) {
                     character.setPositionX(pl.getX()+pl.getWidth());
                 }
-                if (pl.didCollideTop(snowman.getHitBox())) {
+                if (pl.didCollideTop(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionY(pl.getY() - snowman.getHeight());
                 }
-                if (pl.didCollideBottom(snowman.getHitBox())) {
+                if (pl.didCollideBottom(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionY(pl.getY() + pl.getHeight());
                 }
-                if (pl.didCollideLeft(snowman.getHitBox())) {
+                if (pl.didCollideLeft(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionX(pl.getX()-snowman.getWidth());
                 }
-                if (pl.didCollideRight(snowman.getHitBox())) {
+                if (pl.didCollideRight(snowman.getHitBox()) && !snowman.isDead()) {
                     snowman.setPositionX(pl.getX()+pl.getWidth());
                 }
 
