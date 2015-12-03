@@ -213,7 +213,6 @@ public class Level extends GameObject {
                     character.setPositionY(pl.getY()+pl.getHeight());
                     jumped = false;
                     jumpHeight = 0;
-                    numJumps = 0;
                 }
                 if (pl.didCollideLeft(character.getHitBox())) {
                     character.setPositionX(pl.getX()-character.getWidth());
