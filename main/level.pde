@@ -267,6 +267,7 @@ public class Level extends GameObject {
             eggs.update();
             snowcloud.move(2);
             snowcloud.update();
+            life.setPosition(-camera.getX(), camera.getY());
             life.update();
 
 

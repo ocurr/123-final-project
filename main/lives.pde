@@ -10,7 +10,10 @@ public class Lives extends GameObject {
     hb = new HitBox(0,0,1,1);
     hb.setPosition(50,50);
   }
-
+  public void setPosition(int x, int y) {
+    hb.setPosition(x, y);
+  }
+  
   void drawLife(float dx, float dy) {
     pushMatrix();
     translate(dx, dy);
