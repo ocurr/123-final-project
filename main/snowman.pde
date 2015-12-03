@@ -26,6 +26,11 @@ public class Snowman extends GameObject {
     public void setkill(){
         kill = true;
     }
+
+    public void unkill() {
+        kill = false;
+    }
+
     public void setPositionX(int x) {
         HB.setPositionX(x);
     }

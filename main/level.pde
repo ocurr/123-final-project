@@ -131,6 +131,13 @@ public class Level extends GameObject {
         camera.setBounds(0, 0, getWidth(), getHeight());
         camera.setPosition(0,0);
         snowcloud.setPositionX(-500);
+        for (int s=0; s<3; s++) {
+            Snowman snow = enemys.get(s);
+            snow.unkill();
+        }
+        enemys.get(0).setPosition(900,360);
+        enemys.get(1).setPosition(1600,360);
+        enemys.get(2).setPosition(2800, 360);
     }
 
     // takes in the camera and sets it's bounds to the bouds of the level
@@ -141,6 +148,7 @@ public class Level extends GameObject {
         character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
         snowcloud.setPositionX(-500);
         camera = cam;
+        reset();
     }
 
     public void updateKeyReleased(char key) {
