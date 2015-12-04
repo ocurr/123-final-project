@@ -64,6 +64,14 @@ class Camera extends GameObject {
         setY(y);
     }
 
+    public int getX() {
+        return posX;
+    }
+
+    public int getY() {
+        return posY;
+    }
+
     // push the current matrix and translate to the camera's position
     public void set() {
         pushMatrix();

@@ -11,6 +11,10 @@ public class Lives extends GameObject {
     hb.setPosition(50,50);
   }
 
+  public void setPosition(int x, int y) {
+    hb.setPosition(x,y);
+  }
+
   void drawLife(float dx, float dy) {
     pushMatrix();
     translate(dx, dy);
