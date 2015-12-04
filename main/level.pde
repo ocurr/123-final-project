@@ -95,7 +95,7 @@ public class Level extends GameObject {
         snowcloud = new SnowCloud();
         
         
-        for (int i=0; i<15; i++) {
+        for (int i=0; i<14; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
         }
 
@@ -104,16 +104,16 @@ public class Level extends GameObject {
         platforms.get(2).setPosition(width+15, height-150);
         platforms.get(3).setPosition(width+300, height-235);
         platforms.get(4).setPosition(width+500, height - 60);
-        platforms.get(5).setPosition(width+1100, height - 60);
-        platforms.get(6).setPosition(width+1600, height - 60);
-        platforms.get(7).setPosition(width+1800, height -240);
-        platforms.get(8).setPosition(width+2200, height- 240);
-        platforms.get(9).setPosition(width+2600, height-150);
-        platforms.get(10).setPosition(width+2800, height-150);
-        platforms.get(11).setPosition(width+3000, height-150);
-        platforms.get(12).setPosition(width+3200, height-60);
-        platforms.get(13).setPosition(width+4000, height-60);
-        platforms.get(14).setPosition(width+4500, height-60);
+      //  platforms.get(5).setPosition(width+1100, height - 60);
+        platforms.get(5).setPosition(width+1600, height - 60);
+        platforms.get(6).setPosition(width+1800, height -240);
+        platforms.get(7).setPosition(width+2200, height- 240);
+        platforms.get(8).setPosition(width+2600, height-150);
+        platforms.get(9).setPosition(width+2800, height-150);
+        platforms.get(10).setPosition(width+3000, height-150);
+        platforms.get(11).setPosition(width+3200, height-60);
+        platforms.get(12).setPosition(width+4000, height-60);
+        platforms.get(13).setPosition(width+4500, height-60);
     }
 
     // get the width of the level
@@ -207,7 +207,7 @@ public class Level extends GameObject {
                 jumpHeight = 0;
             }
 
-            for (int p=0; p<15; p++) {
+            for (int p=0; p<14; p++) {
                 Sprite pl = platforms.get(p);
 
 
@@ -234,7 +234,7 @@ public class Level extends GameObject {
             for (int s=0; s<3; s++) {
                 Snowman snowman = enemys.get(s);
 
-                for (int p=0; p<15; p++) {
+                for (int p=0; p<14; p++) {
                     Sprite pl = platforms.get(p);
 
                     if (pl.didCollideTop(snowman.getHitBox()) && !snowman.isDead()) {
