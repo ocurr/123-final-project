@@ -10,6 +10,8 @@ PImage rock;
 PImage fire;
 PImage smoke;
 PImage end;
+PImage yay;
+PImage ohno;
 float rotTHIGH;
 float rotTHIGH2;
 float rotLEG;
@@ -30,6 +32,7 @@ boolean THIGHmove2 = true;
 boolean LEGmove = true;
 boolean LEGmove2 = true;
 boolean dinoEnter = true;
+boolean meteor = false;
 
 float px[];
 float py[];
@@ -48,7 +51,9 @@ private EndScene() {
   smoke = loadImage(endingPath+"smoke.png");
   fire = loadImage(endingPath+"fire.png");
   end = loadImage(endingPath+"end.png");
-
+  yay = loadImage(endingPath+"yay.png");
+  ohno = loadImage(endingPath+"ohno.png");
+  
   rotHEAD = 0;
   rotTHIGH = -.5;
   rotTHIGH2 = 0;
@@ -80,9 +85,13 @@ private EndScene() {
 }
 
 private void update() {
-  if (count <530) {
+ 
+ // if (count <530) {
     count++;
-  }
+//  }
+  
+  println(count);
+  
   pushMatrix();
   image(background, 0, 0);
   popMatrix();
@@ -117,6 +126,17 @@ private void update() {
   if (dx < 590) {
     animate();
   }
+  
+  if (dx >= 400){
+      image(yay, 450, 50);
+  }
+   if (count>380){
+  
+    image(ohno, 450, 100);
+  }
+  
+  
+  
   drawCloud();
   if (dx >= 50) {
     drawSnow();
@@ -128,16 +148,22 @@ private void update() {
   }
   popMatrix();
   pushMatrix();
+  
+  
+  if (count >420){
   drawMeteor();
-  if (rx <=1000) {
+ 
     animateROCK();
-  }
+  
+ }
 
-  if (rx > 900) {
+  if (rx >1300) {
     drawBOOM();
   }
+  
+ 
 
-  if (count > 528) {
+  if (count > 720) {
     image(end, 0, 0);
   }
 
@@ -396,7 +422,7 @@ private void drawSnow() {
 private void drawMeteor() {
 
   pushMatrix();
-  translate(-300, -200);
+  translate(-800, -500);
   translate(rx, ry);
   scale(.25);
   pushMatrix();
