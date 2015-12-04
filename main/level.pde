@@ -10,11 +10,7 @@ public class Level extends GameObject {
 
     private Sprite eggs;
     private Dinosaur character;
-    /*
-    private Snowman snowman;
-    private Snowman snowman2;
-    private Snowman snowman3;
-    */
+    
     private Lives life;
     private ArrayList<Lives> lives;
     private SnowCloud snowcloud;
@@ -54,21 +50,14 @@ public class Level extends GameObject {
         camera = null;
 
         enemys = new ArrayList<Snowman>();
-        for (int i=0; i<3; i++) {
+        for (int i=0; i<4; i++) {
             enemys.add(new Snowman());
         }
         enemys.get(0).setPosition(900,360);
         enemys.get(1).setPosition(1600,360);
         enemys.get(2).setPosition(2800, 360);
+        enemys.get(3).setPosition(3400, 360);
 
-        /*
-        snowman = new Snowman(); 
-        snowman.setPosition(900, 360);
-        snowman2 = new Snowman();
-        snowman2.setPosition(1600, 360);
-        snowman3 = new Snowman();
-        snowman3.setPosition(2800, 360);
-        */
         life = new Lives();
 
         lives = new ArrayList<Lives>();
@@ -99,7 +88,6 @@ public class Level extends GameObject {
         eggs.setPosition(width+4900, height-70);
         
         snowcloud = new SnowCloud();
-        
         
         for (int i=0; i<14; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
@@ -237,7 +225,7 @@ public class Level extends GameObject {
 
                 pl.update();
             }
-            for (int s=0; s<3; s++) {
+            for (int s=0; s<4; s++) {
                 Snowman snowman = enemys.get(s);
 
                 for (int p=0; p<14; p++) {

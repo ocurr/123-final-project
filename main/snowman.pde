@@ -67,15 +67,15 @@ public class Snowman extends GameObject {
         smooth();
         pushMatrix();
         translate(-60, -80);
-        scl = 0.3;
+        scl = 0.4;
         scale(scl);
-        fill(255);
+        fill(0);
         //body 
         ellipse(200, 300, 100, 85);
         ellipse(200, 240, 80, 70);
         ellipse(200, 190, 55, 55);
         //buttons
-        fill(0);
+        fill(233, 233, 233);
         ellipse(200, 290, 8, 8);
         ellipse(200, 305, 8, 8);
         ellipse(200, 320, 8, 8);
@@ -90,8 +90,8 @@ public class Snowman extends GameObject {
         //demon eyes
         fill(255, 0, 0);
         noStroke();
-        ellipse(185, 183, 8, 8);
-        ellipse(207, 183, 8, 8);
+        ellipse(185, 183, 10, 10);
+        ellipse(207, 183, 10, 10);
         //nose
         fill(247, 126, 12);
         translate(0, -7);
@@ -124,9 +124,6 @@ public class Snowman extends GameObject {
 
     //updating animation parameters 
     void animate() {
-        //Sloc.x = Sloc.x + dir.x *time;
-        //Sloc.y = Sloc.y + dir.y * time;
-
         if (armMove){
             armR -= 0.02;
         }else{ 
@@ -157,23 +154,13 @@ public class Snowman extends GameObject {
         }
     }
 
-    /*void setup(){
-      size(400, 400);
-      smooth();
-      armR = radians(50);
-      armR2 = radians(40);
-      Sloc = new PVector(width*.5, height/8);
-      dir = new PVector(-0.5, 0);
-      time = 0.3;
-      }*/
-      
   public boolean isDead(){
     return kill;
   }
   
     void update() {
         if (!kill) {
-            drawSnowman(HB.getPosition().x, HB.getPosition().y);
+            drawSnowman(HB.getPosition().x, HB.getPosition().y-32);
             //HB.drawHitRect(0, 0);
             animate();
         } else {
