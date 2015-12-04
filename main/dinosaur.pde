@@ -37,6 +37,8 @@ class Dinosaur extends GameObject {
     float flipOffsetY;
 
     int numLives;
+    boolean lockLives;
+    int lifeLockPos;
 
     Dinosaur() {
 
@@ -58,6 +60,8 @@ class Dinosaur extends GameObject {
         flipOffsetY = 0;
 
         numLives = 3;
+        lockLives = false;
+        lifeLockPos = 0;
 
         //(int)(470*0.34) (int)(325*0.34))
         hb = new HitBox(0,0,40,(int)(325*0.34));
@@ -76,12 +80,23 @@ class Dinosaur extends GameObject {
         flipOffsetY = 0;
     }
 
+    public void setInv() {
+        lockLives = true;
+        lifeLockPos = hb.getX();
+    }
+
+    public boolean getInv() {
+        return lockLives;
+    }
+
     public int getNumLives() {
         return numLives;
     }
 
     public void setNumLives(int lives) {
-        numLives = lives;
+        if (!lockLives) {
+            numLives = lives;
+        }
     }
 
     public void setPositionX(int x) {
@@ -122,6 +137,11 @@ class Dinosaur extends GameObject {
     }
 
     void update() {
+
+        if (abs(lifeLockPos - hb.getX()) > 100 && lockLives) {
+            lockLives = false;
+        }
+
         drawDino(hb.getX(),hb.getY());
         if (dinoAnimate) {
             animate();
