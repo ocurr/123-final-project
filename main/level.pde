@@ -16,6 +16,7 @@ public class Level extends GameObject {
     private Snowman snowman3;
     */
     private Lives life;
+    private ArrayList<Lives> lives;
     private SnowCloud snowcloud;
 
     ArrayList<Snowman> enemys;
@@ -69,6 +70,11 @@ public class Level extends GameObject {
         snowman3.setPosition(2800, 360);
         */
         life = new Lives();
+
+        lives = new ArrayList<Lives>();
+        for (int i = 0; i<3; i++) {
+            lives.add(new Lives());
+        }
         collider = new Collider();
 
         platforms = new ArrayList<Sprite>();
@@ -252,6 +258,8 @@ public class Level extends GameObject {
                 }
                 if (collider.detectCollisionTop(snowman.getHitBox(), character.getHitBox())) {
                     snowman.setkill();
+                } else if (collider.detectCollision(snowman.getHitBox(), character.getHitBox()) && !snowman.isDead()) {
+                    character.setNumLives(character.getNumLives()-1);
                 }
                 snowman.update();
                 snowman.move(new PVector(.1, 5));
@@ -267,8 +275,12 @@ public class Level extends GameObject {
             eggs.update();
             snowcloud.move(2);
             snowcloud.update();
-            life.setPosition(-camera.getX(), camera.getY());
-            life.update();
+            for (int i=0; i< character.getNumLives(); i++) {
+                lives.get(i).setPosition(-camera.getX()+(i*50), camera.getY());
+                lives.get(i).update();
+            }
+            //life.setPosition(-camera.getX(), camera.getY());
+            //life.update();
 
 
             popMatrix();

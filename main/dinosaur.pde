@@ -36,6 +36,8 @@ class Dinosaur extends GameObject {
     float flipOffsetX;
     float flipOffsetY;
 
+    int numLives;
+
     Dinosaur() {
 
         rotHEAD = 0;
@@ -55,6 +57,8 @@ class Dinosaur extends GameObject {
         flipOffsetX = 0;
         flipOffsetY = 0;
 
+        numLives = 3;
+
         //(int)(470*0.34) (int)(325*0.34))
         hb = new HitBox(0,0,40,(int)(325*0.34));
         hb.setPosition(0,0);
@@ -70,6 +74,14 @@ class Dinosaur extends GameObject {
         scaleMult = 1;
         flipOffsetX = 0;
         flipOffsetY = 0;
+    }
+
+    public int getNumLives() {
+        return numLives;
+    }
+
+    public void setNumLives(int lives) {
+        numLives = lives;
     }
 
     public void setPositionX(int x) {
