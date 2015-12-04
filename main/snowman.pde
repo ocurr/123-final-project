@@ -62,7 +62,7 @@ public class Snowman extends GameObject {
     //code to draw the snowman with animation parameters armR and arm2R
     void drawSnowman(float dx, float dy) {
         pushMatrix();
-        translate(dx+15, dy+22);
+        translate(dx-5, dy-11);
         noStroke();
         smooth();
         pushMatrix();
@@ -160,7 +160,7 @@ public class Snowman extends GameObject {
   
     void update() {
         if (!kill) {
-            drawSnowman(HB.getPosition().x, HB.getPosition().y-32);
+            drawSnowman(HB.getPosition().x, HB.getPosition().y);
             //HB.drawHitRect(0, 0);
             animate();
         } else {
