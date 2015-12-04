@@ -50,7 +50,7 @@ public class StartScene{
         dy = 0;
         bx = 0;
         by = 300;
-        println(background.width, background.height);
+        //println(background.width, background.height);
 
         numflakes = 20;
         px = new float[numflakes];
@@ -124,7 +124,7 @@ public class StartScene{
 
 
 
-        println(rotTHIGH, THIGHmove, rotLEG, LEGmove);
+        //println(rotTHIGH, THIGHmove, rotLEG, LEGmove);
     }
 
     private void drawDino() {
