@@ -24,6 +24,10 @@ public class StartScene{
     boolean LEGmove = true;
     boolean LEGmove2 = true;
     boolean dinoEnter = true;
+    
+          float Th1=0;
+            float Th2=0;
+            float Th3=0;
 
     float px[];
     float py[];
@@ -69,6 +73,11 @@ public class StartScene{
 
     private void update() {
         count++;
+         //if(Th1 <20){
+             //Th1++;
+            //}else{
+              Th1=20;
+            
 
         pushMatrix();
 
@@ -88,16 +97,9 @@ public class StartScene{
             ellipse(150, 50, 200, 100);
             ellipse(150, 0, 100, 100);
             ellipse(-150, 50, 150, 100);
-
-            fill(255);
-            ellipse(200, 150, 20, 20);
-            ellipse(240, 130, 30, 30);
-            ellipse(300, 100, 50, 50);
-            ellipse(400, 50, 250, 200);
-
+            
             pushMatrix();
-            scale(.3);
-            image(nest, 950, 140);
+            drawThought();
             popMatrix();
 
             fill(223, 229, 157);
@@ -115,11 +117,13 @@ public class StartScene{
             translate(-420, -50);
             ellipse(430, 50, 40, 60);
             popMatrix();
-
+              
+              pushMatrix();
             scale(.3);
             image(text, -2700, -200);
 
             image(text2, -2700, -200);
+            popMatrix();
         }
 
 
@@ -375,7 +379,21 @@ public class StartScene{
         }
     }
 
+    private void drawThought(){
+            pushMatrix();
+            fill(255);
+            ellipse(200, 150, Th1, Th1);
+            ellipse(240, 130, 30, 30);
+            ellipse(300, 100, 50, 50);
+            ellipse(400, 50, 250, 200);
 
+            pushMatrix();
+            scale(.3);
+            image(nest, 950, 140);
+            popMatrix();
+            popMatrix();
+            
+    }
 
 
     private void animate() {
