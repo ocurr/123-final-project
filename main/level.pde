@@ -30,6 +30,9 @@ public class Level extends GameObject {
     private int jumpRate;
     private boolean jumped;
     private int numJumps;
+    
+    boolean reReset = false;
+    private int width_rect = 0;
 
     // takes in a path to the background image
     public Level(String levelPath) {
@@ -162,7 +165,19 @@ public class Level extends GameObject {
             background.update();
 
             if (character.getY() > height+150) {
+                character.setNumLives(character.getNumLives()-1);
+                reReset = true;
                 reset();
+            }
+            
+            if (reReset == true) {
+              fill(0, 0, 0, 200);
+              rect(0, 0, width_rect, height);
+              width_rect += 10;
+              if (width_rect > 800) {
+                width_rect = 0;
+                reReset = false;
+              }
             }
 
             int dx, dy;
@@ -257,12 +272,15 @@ public class Level extends GameObject {
             }
 
             if (character.getNumLives() <= 0) {
+                reReset = true;
                 reset();
                 character.setNumLives(3);
             }
 
             
             if (collider.detectCollision(snowcloud.getHitBox(), character.getHitBox())){
+                character.setNumLives(character.getNumLives()-1);
+                reReset = true;
                 reset();
             }
 
