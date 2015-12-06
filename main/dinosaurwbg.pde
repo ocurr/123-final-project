@@ -39,7 +39,7 @@ public class StartScene{
 
     private StartScene() {
 
-        background = loadImage(startPath+"background.png");
+        background = loadImage(startPath+"bg2.png");
         text = loadImage(startPath+"text.png");
         text2 = loadImage(startPath+"text2.png");
         nest = loadImage(startPath+ "nest.png");
@@ -81,7 +81,7 @@ public class StartScene{
 
         pushMatrix();
 
-        image(background, 0, 0);
+        image(background, -22, 0);
         popMatrix();
 
 
