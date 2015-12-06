@@ -164,41 +164,33 @@ public class Level extends GameObject {
             pushMatrix();
             background.update();
 
-            if (character.getY() > height+150) {
+            if (character.getY() > height+150 && !reReset) {
                 character.setNumLives(character.getNumLives()-1);
                 reReset = true;
-                reset();
             }
             
-            if (reReset == true) {
-              fill(0, 0, 0, 200);
-              rect(0, 0, width_rect, height);
-              width_rect += 10;
-              if (width_rect > 800) {
-                width_rect = 0;
-                reReset = false;
-              }
-            }
 
             int dx, dy;
             dx = dy = 0;
 
-            if (keys.get('d') || keys.get('D')) {
-                dx = 4;
-                character.flipRight();
-                character.dinoAnimate = true;
-            }
-            else if (keys.get('a') || keys.get('A')) {
-                dx = -4;
-                character.flipLeft();
-                character.dinoAnimate = true;
-            }else{
-                character.dinoAnimate = false;
-            }
-            if ((keys.get('w') || keys.get('W')) && !jumped && numJumps < 2) {
-                jumped = true;
-                jumpHeight = 25;
-                numJumps++;
+            if (!reReset) {
+                if (keys.get('d') || keys.get('D')) {
+                    dx = 4;
+                    character.flipRight();
+                    character.dinoAnimate = true;
+                }
+                else if (keys.get('a') || keys.get('A')) {
+                    dx = -4;
+                    character.flipLeft();
+                    character.dinoAnimate = true;
+                }else{
+                    character.dinoAnimate = false;
+                }
+                if ((keys.get('w') || keys.get('W')) && !jumped && numJumps < 2) {
+                    jumped = true;
+                    jumpHeight = 25;
+                    numJumps++;
+                }
             }
 
             character.move(new PVector(dx,dy+(gravity-jumpHeight)));
@@ -265,23 +257,20 @@ public class Level extends GameObject {
                     snowman.setkill();
                 } else if (collider.detectCollision(snowman.getHitBox(), character.getHitBox()) && !snowman.isDead() && !character.getInv()) {
                     character.setNumLives(character.getNumLives()-1);
-                    character.setInv();
+                    if (character.getNumLives() <= 0) {
+                        reReset = true;
+                    } else {
+                        character.setInv();
+                    }
                 }
                 snowman.update();
                 snowman.move(new PVector(.1, 5));
             }
 
-            if (character.getNumLives() <= 0) {
-                reReset = true;
-                reset();
-                character.setNumLives(3);
-            }
-
             
-            if (collider.detectCollision(snowcloud.getHitBox(), character.getHitBox())){
+            if (collider.detectCollision(snowcloud.getHitBox(), character.getHitBox()) && !reReset){
                 character.setNumLives(character.getNumLives()-1);
                 reReset = true;
-                reset();
             }
 
             character.update();
@@ -295,6 +284,20 @@ public class Level extends GameObject {
             }
             //life.setPosition(-camera.getX(), camera.getY());
             //life.update();
+
+            if (reReset == true) {
+              fill(0, 0, 0, 200);
+              rect(-camera.getX(), 0, width_rect, height);
+              width_rect += 10;
+              if (width_rect > 800) {
+                  if (character.getNumLives() <= 0) {
+                      character.setNumLives(3);
+                  }
+                width_rect = 0;
+                reReset = false;
+                reset();
+              }
+            }
 
             popMatrix();
         }
