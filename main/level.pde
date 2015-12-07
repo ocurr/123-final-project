@@ -1,4 +1,4 @@
-//Oliver Curry - created technology for hit boxes, collisions, and levels 
+//Oliver Curry - created technology for hit boxes, collisions, and levels
 //Emily Guerra - added and positioned platforms
 // Level is an object that handles individual levels
 public class Level extends GameObject {
@@ -10,7 +10,7 @@ public class Level extends GameObject {
 
     private Sprite eggs;
     private Dinosaur character;
-    
+
     private Lives life;
     private ArrayList<Lives> lives;
     private SnowCloud snowcloud;
@@ -30,7 +30,7 @@ public class Level extends GameObject {
     private int jumpRate;
     private boolean jumped;
     private int numJumps;
-    
+
     boolean reReset = false;
     private int width_rect = 0;
 
@@ -39,14 +39,14 @@ public class Level extends GameObject {
         background = new Sprite(levelPath);
         background.setPosition(0, 0);
         backgroundLeft = new Sprite(
-                background.getX()-10, 
-                background.getY(), 
-                10, 
+                background.getX()-10,
+                background.getY(),
+                10,
                 background.getHeight());
         backgroundRight = new Sprite(
-                background.getX()+background.getWidth(), 
-                background.getY(), 
-                10, 
+                background.getX()+background.getWidth(),
+                background.getY(),
+                10,
                 background.getHeight());
 
         character = null;
@@ -89,9 +89,9 @@ public class Level extends GameObject {
 
         eggs = new Sprite(spritePath+"eggs.png");
         eggs.setPosition(width+4900, height-70);
-        
+
         snowcloud = new SnowCloud();
-        
+
         for (int i=0; i<14; i++) {
             platforms.add(new Sprite(spritePath + "platform"+Integer.toString(i+1)+".png"));
         }
@@ -122,7 +122,7 @@ public class Level extends GameObject {
     public int getHeight() {
         return background.getHeight();
     }
-    
+
     private void reset(){
        character.setPosition(platforms.get(0).getX(), platforms.get(0).getY()-character.getHeight());
         camera.setBounds(0, 0, getWidth(), getHeight());
@@ -147,6 +147,7 @@ public class Level extends GameObject {
         snowcloud.setPositionX(-500);
         camera = cam;
         reset();
+        character.setNumLives(3);
     }
 
     public void updateKeyReleased(char key) {
@@ -168,7 +169,7 @@ public class Level extends GameObject {
                 character.setNumLives(character.getNumLives()-1);
                 reReset = true;
             }
-            
+
 
             int dx, dy;
             dx = dy = 0;
@@ -267,7 +268,7 @@ public class Level extends GameObject {
                 snowman.move(new PVector(.1, 5));
             }
 
-            
+
             if (collider.detectCollision(snowcloud.getHitBox(), character.getHitBox()) && !reReset){
                 character.setNumLives(character.getNumLives()-1);
                 reReset = true;
