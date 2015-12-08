@@ -40,8 +40,7 @@ public class StartScene{
     private StartScene() {
 
         background = loadImage(startPath+"bg2.png");
-        text = loadImage(startPath+"text4.png");
-        text2 = loadImage(startPath+"text2.png");
+        text = loadImage(startPath+"text.png");
         nest = loadImage(startPath+ "nest.png");
 
         rotHEAD = 0;
@@ -129,7 +128,7 @@ public class StartScene{
 
 
 
-        println(rotTHIGH, THIGHmove, rotLEG, LEGmove);
+     //   println(rotTHIGH, THIGHmove, rotLEG, LEGmove);
     }
 
     private void drawDino() {

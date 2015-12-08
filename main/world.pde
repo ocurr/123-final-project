@@ -118,7 +118,7 @@ public class World extends GameObject {
               surface.setSize(1034, 510);
               menuScreen.update();
             } else if (tutorial) {
-              surface.setSize(1034, 600);
+              surface.setSize(1034, 510);
               tutorialScreen.update();
             } else if (gameended){
               surface.setSize(1034, 510);
