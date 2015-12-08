@@ -16,6 +16,7 @@ public class World extends GameObject {
   private boolean gamestarted = false;
   private boolean gameended = false;
 
+
   private HashMap<Character, Boolean> keys;
 
   public World() {

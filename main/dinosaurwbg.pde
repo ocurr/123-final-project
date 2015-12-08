@@ -40,7 +40,7 @@ public class StartScene{
     private StartScene() {
 
         background = loadImage(startPath+"bg2.png");
-        text = loadImage(startPath+"text.png");
+        text = loadImage(startPath+"text4.png");
         text2 = loadImage(startPath+"text2.png");
         nest = loadImage(startPath+ "nest.png");
 
@@ -119,10 +119,11 @@ public class StartScene{
             popMatrix();
               
               pushMatrix();
-            scale(.3);
-            image(text, -2700, -200);
+           // scale(.4);
+          //  image(text, -2700, -200);
+             image(text, -830, -50);
 
-            image(text2, -2700, -200);
+           // image(text2, -2700, -200);
             popMatrix();
         }
 

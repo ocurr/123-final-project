@@ -45,15 +45,15 @@ public class EndScene {
 
   private EndScene() {
 
-    background = loadImage(endingPath+ "background2.png");
+    background = loadImage(endingPath+ "bg2.png");
 
     nest = loadImage(endingPath+"nest.png");
     rock = loadImage(endingPath+"rock.png");
     smoke = loadImage(endingPath+"smoke.png");
     fire = loadImage(endingPath+"fire.png");
     end = loadImage(endingPath+"end.png");
-    yay = loadImage(endingPath+"yay.png");
-    ohno = loadImage(endingPath+"ohno.png");
+    yay = loadImage(endingPath+"hurray.png");
+    ohno = loadImage(endingPath+"wait.png");
 
     rotHEAD = 0;
     rotHEAD2 = 0;
@@ -130,11 +130,11 @@ public class EndScene {
     }
 
     if (dx >= 400) {
-      image(yay, 450, 50);
+      image(yay, 450, 20);
     }
     if (count>380) {
 
-      image(ohno, 450, 100);
+      image(ohno, 450, 70);
     }
 
 
