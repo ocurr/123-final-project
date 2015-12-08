@@ -13,8 +13,13 @@ public class World extends GameObject {
 
   private EndScene endscene;
   private StartScene startscene;
-  private boolean gamestarted = false;
+  private boolean gamestarted = true;
   private boolean gameended = false;
+  private boolean menu = true;
+  private boolean tutorial = false;
+
+  private Sprite menuScreen;
+  private Sprite tutorialScreen;
 
   private HashMap<Character, Boolean> keys;
 
@@ -25,6 +30,9 @@ public class World extends GameObject {
     camera = new Camera();
 
     dino = new Dinosaur();
+
+    menuScreen = new Sprite(resourcePath + "dinodisaster.png");
+    tutorialScreen = new Sprite(resourcePath + "instructions.png");
 
     endscene = new EndScene();
     startscene = new StartScene();
@@ -64,6 +72,26 @@ public class World extends GameObject {
   }
 
     public void updateLevelKeysPressed(char key) {
+      if (key == ' ') {
+        if (menu) {
+          menu = false;
+          tutorial = true;
+        } else if (tutorial) {
+          tutorial = false;
+          gamestarted = false;
+        } else if (gameended) {
+          gamestarted = false;
+          gameended = false;
+          startscene = new StartScene();
+          endscene = new EndScene();
+          menu = true;
+          tutorial = false;
+        } else if (!gamestarted) {
+          surface.setSize(800,600);
+          gamestarted = true;
+          levels.get(0).init(camera, dino);
+        }
+      }
         levels.get(currentLevel).updateKeyPressed(key);
     }
 
@@ -81,31 +109,24 @@ public class World extends GameObject {
     // this includes character controls, the camera, and the current level
     @Override
         public void update() {
-            if (mousePressed && gameended) {
-                gamestarted = false;
-                gameended = false;
-                startscene = new StartScene();
-                endscene = new EndScene();
-            } else if (mousePressed && !gamestarted){
-                surface.setSize(800,600);
-                gamestarted = true;
-                levels.get(0).init(camera, dino);
-            }
-
             if(dino.getX() >= width+4700 && gamestarted){
                 gameended = true;
             }
 
-
-            if (gameended){
-                surface.setSize(1034, 510);
-                endscene.update();
-                gamestarted = false;
+            if (menu) {
+              surface.setSize(1034, 510);
+              menuScreen.update();
+            } else if (tutorial) {
+              surface.setSize(1034, 600);
+              tutorialScreen.update();
+            } else if (gameended){
+              surface.setSize(1034, 510);
+              endscene.update();
+              gamestarted = false;
             } else if (!gamestarted){
-                surface.setSize(1034, 510);
-                startscene.update();
+              surface.setSize(1034, 510);
+              startscene.update();
             } else {
-
 
                 if (dino.getX()+dino.getHitBox().getWidth() > width/2) {
                     camera.setPosition(-(dino.getX()+dino.getHitBox().getWidth()-width/2), 0);
@@ -118,11 +139,8 @@ public class World extends GameObject {
 
                 dino.update();
 
-                //snowman.update();
-
                 popMatrix();
                 camera.unset();
             }
         }
-
 }
