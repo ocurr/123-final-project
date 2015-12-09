@@ -33,6 +33,9 @@ void mousePressed() {
 
 void keyPressed() {
     world.updateLevelKeysPressed(key);
+    if (key == 'p') {
+        saveFrame("frame.jpg");
+    }
 }
 
 void keyReleased() {
