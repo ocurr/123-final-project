@@ -258,11 +258,7 @@ public class Level extends GameObject {
                     snowman.setkill();
                 } else if (collider.detectCollision(snowman.getHitBox(), character.getHitBox()) && !snowman.isDead() && !character.getInv()) {
                     character.setNumLives(character.getNumLives()-1);
-                    if (character.getNumLives() <= 0) {
-                        reReset = true;
-                    } else {
-                        character.setInv();
-                    }
+                    character.setInv();
                 }
                 snowman.update();
                 snowman.move(new PVector(.1, 5));
@@ -286,14 +282,15 @@ public class Level extends GameObject {
             //life.setPosition(-camera.getX(), camera.getY());
             //life.update();
 
+            if (character.getNumLives() <= 0) {
+                reReset = false;
+            }
+
             if (reReset == true) {
               fill(0, 0, 0, 200);
               rect(-camera.getX(), 0, width_rect, height);
               width_rect += 10;
               if (width_rect > 800) {
-                  if (character.getNumLives() <= 0) {
-                      character.setNumLives(3);
-                  }
                 width_rect = 0;
                 reReset = false;
                 reset();

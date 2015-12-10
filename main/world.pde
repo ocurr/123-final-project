@@ -18,9 +18,11 @@ public class World extends GameObject {
   private boolean menu = true;
   private boolean tutorial = false;
   private boolean opening = false;
+  private boolean gameover = false;
 
   private Sprite menuScreen;
   private Sprite tutorialScreen;
+  private Sprite gameOverScreen;
 
 
   private HashMap<Character, Boolean> keys;
@@ -35,6 +37,7 @@ public class World extends GameObject {
 
     menuScreen = new Sprite(resourcePath + "dinodisaster.png");
     tutorialScreen = new Sprite(resourcePath + "instructions.png");
+    gameOverScreen = new Sprite(resourcePath + "GameOver.png");
 
     endscene = new EndScene();
     startscene = new StartScene();
@@ -82,6 +85,8 @@ public class World extends GameObject {
         } else if (tutorial) {
           tutorial = false;
           gamestarted = true;
+          surface.setSize(800,600);
+          levels.get(0).init(camera, dino);
         } else if (opening) {
           opening = false;
           tutorial = true;
@@ -93,10 +98,9 @@ public class World extends GameObject {
           gamestarted = false;
           menu = true;
           gameended = false;
-        }
-        if (gamestarted) {
-          surface.setSize(800,600);
-          levels.get(0).init(camera, dino);
+        } else if (gameover) {
+            gameover = false;
+            menu = true;
         }
       }
         levels.get(currentLevel).updateKeyPressed(key);
@@ -139,6 +143,10 @@ public class World extends GameObject {
                 levels.get(currentLevel).update();
 
                 dino.update();
+                if (dino.getNumLives() <= 0) {
+                    gamestarted = false;
+                    gameover = true;
+                }
 
                 popMatrix();
                 camera.unset();
@@ -148,6 +156,11 @@ public class World extends GameObject {
                     gamestarted = false;
                 }
 
+            } else if (gameover) {
+                fill(0);
+                rect(-camera.getX(),0,800,600);
+                gameOverScreen.setPosition(170,260);
+                gameOverScreen.update();
             } else if (gameended){
               surface.setSize(1034, 510);
               endscene.update();
