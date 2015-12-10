@@ -17,6 +17,7 @@ public class World extends GameObject {
   private boolean gameended = false;
   private boolean menu = true;
   private boolean tutorial = false;
+  private boolean opening = false;
 
   private Sprite menuScreen;
   private Sprite tutorialScreen;
@@ -75,21 +76,26 @@ public class World extends GameObject {
     public void updateLevelKeysPressed(char key) {
       if (key == ' ') {
         if (menu) {
+          gameended = false;
           menu = false;
-          tutorial = true;
+          opening = true;
         } else if (tutorial) {
           tutorial = false;
-          gamestarted = false;
+          gamestarted = true;
+        } else if (opening) {
+          opening = false;
+          tutorial = true;
         } else if (gameended) {
-          gamestarted = false;
-          gameended = false;
           startscene = new StartScene();
           endscene = new EndScene();
-          menu = true;
+          opening = false;
           tutorial = false;
-        } else if (!gamestarted) {
+          gamestarted = false;
+          menu = true;
+          gameended = false;
+        }
+        if (gamestarted) {
           surface.setSize(800,600);
-          gamestarted = true;
           levels.get(0).init(camera, dino);
         }
       }
@@ -110,9 +116,6 @@ public class World extends GameObject {
     // this includes character controls, the camera, and the current level
     @Override
         public void update() {
-            if(dino.getX() >= width+4700 && gamestarted){
-                gameended = true;
-            }
 
             if (menu) {
               surface.setSize(1034, 510);
@@ -120,14 +123,11 @@ public class World extends GameObject {
             } else if (tutorial) {
               surface.setSize(1034, 510);
               tutorialScreen.update();
-            } else if (gameended){
-              surface.setSize(1034, 510);
-              endscene.update();
-              gamestarted = false;
-            } else if (!gamestarted){
+            } else if (opening){
               surface.setSize(1034, 510);
               startscene.update();
-            } else {
+            } else if (gamestarted) {
+                surface.setSize(800,600);
 
                 if (dino.getX()+dino.getHitBox().getWidth() > width/2) {
                     camera.setPosition(-(dino.getX()+dino.getHitBox().getWidth()-width/2), 0);
@@ -142,6 +142,16 @@ public class World extends GameObject {
 
                 popMatrix();
                 camera.unset();
+
+                if(dino.getX() >= width+4700){
+                    gameended = true;
+                    gamestarted = false;
+                }
+
+            } else if (gameended){
+              surface.setSize(1034, 510);
+              endscene.update();
             }
+
         }
 }
