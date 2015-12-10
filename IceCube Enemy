@@ -1,0 +1,105 @@
+public class Ice extends GameObject {
+  float scl;
+  boolean kill = false;
+
+  private HitBox HB;
+
+  public Ice() {
+    //size(400, 400);
+    smooth();
+    fill(255, 0, 0);
+    HB = new HitBox(1200, 220, 30, 45);
+    HB.setPosition(1200, 400);
+  }
+
+  public void setkill() {
+    kill = true;
+  }
+
+  public void unkill() {
+    kill = false;
+  }
+
+  public void setPositionX(int x) {
+    HB.setPositionX(x);
+  }
+
+  public void setPositionY(int y) {
+    HB.setPositionY(y);
+  }
+
+  public void setPosition(int x, int y) {
+    setPositionX(x);
+    setPositionY(y);
+  }
+
+  public void move(PVector p) {
+    setPosition((int)(HB.getPosition().x + p.x), (int)(HB.getPosition().y + p.y));
+  }
+
+  public int getHeight() {
+    return HB.getHeight();
+  }
+
+  public int getWidth() {
+    return HB.getWidth();
+  }
+  public HitBox getHitBox() {
+    return HB;
+  }
+
+  //code to draw the snowman with animation parameters armR and arm2R
+  void drawIce(float dx, float dy) {
+    pushMatrix();
+    translate(dx-5, dy-11);
+    scl = 0.7;
+    scale(scl);
+    noStroke();
+    smooth();
+    fill(111, 219, 212, 200);
+    beginShape();
+    vertex(200, 140);
+    vertex(220, 150);
+    vertex(240, 260);
+    vertex(160, 260);
+    vertex(180, 150);
+    vertex(200, 140);
+    endShape();
+    fill(135, 234, 229, 80);
+    beginShape();
+    vertex(160, 160);
+    vertex(180, 170);
+    vertex(190, 260);
+    vertex(130, 260);
+    vertex(140, 170);
+    vertex(160, 160);
+    endShape();
+    fill(135, 234, 229, 80);
+    beginShape();
+    vertex(240, 160);
+    vertex(260, 170);
+    vertex(270, 260);
+    vertex(210, 260);
+    vertex(220, 170);
+    vertex(240, 160);
+    endShape();
+    fill(255, 0, 0);
+    //eyes
+    ellipse(180, 193, 10, 30);
+    ellipse(220, 193, 10, 30);
+    //mouth
+    popMatrix();
+  }
+
+  public boolean isDead() {
+    return kill;
+  }
+
+  void update() {
+    if (!kill) {
+      drawIce(HB.getPosition().x, HB.getPosition().y);
+    } else {
+      drawIce(HB.getPosition().x+=3, HB.getPosition().y+=3);
+    }
+  }
+}
